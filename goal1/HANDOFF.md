@@ -108,27 +108,43 @@ Highland 的 81 个材质：`SingleTextureShader`=66，`SpriteShader`=14，`Terr
 
 ---
 
-## 5. 下一步：M3 测试（首要任务）
+## 5. M3 测试（已完成）
 
-`src/layout.js` 已实现但**未测试**。下一个 agent 应：
+`src/layout.js` 已修复 bug 并通过全部测试。
 
-### 5.1 写 M3 端到端测试
-建议新建 `test/verify-layout.js`，验证：
-1. `generateDefaultLayout()` 返回合法的 `{ props, materials }`
-2. 喂给 `serializeMapBin` → 生成 map.bin（不报错）
-3. 用 `parseMapBin` 读回 → props/materials 数量与原始一致
-4. 对称布局：props 数量应为选取消数的 2 倍
-5. 所有 prop 的 `pos` 在 `SIZE_BOUNDS` 范围内
-6. 所有 prop 的 `matID` 在 materials 表中存在
-7. 所有 prop 的 `name` 在 `library_index.json` 中存在
+### 5.1 已完成的 M3 端到端测试 `test/verify-layout.js`（20/20 ✓）
+1. ✅ `generateDefaultLayout()` 返回合法的 `{ props, materials }`
+2. ✅ 喂给 `serializeMapBin` → 生成 map.bin（不报错）
+3. ✅ 用 `parseMapBin` 读回 → props/materials 数量与原始一致
+4. ✅ 对称布局：props 数量应为选取消数的 2 倍
+5. ✅ 所有 prop 的 `pos` 在 `SIZE_BOUNDS` 范围内
+6. ✅ 所有 prop 的 `matID` 在 materials 表中存在
+7. ✅ 所有 prop 的 `name` 在 `library_index.json` 中存在
+8. ✅ 自定义参数（large/非对称）端到端
+9. ✅ 同 seed 可复现性
+10. ✅ material shader 全为 SingleTextureShader
 
-### 5.2 可能需要修复的点
-- `layout.js` 中 `libName` 的处理：目前 newyear 库的 prop 设 `libName='newyear'`，main 库设 `libName=''`。需对照 `editor.html:2813` 确认 `libName` 应为空字符串还是库 ID（实测真实 Highland 的 props `libName` 多为 `''`）。
-- `buildMaterials` 的 `propMatID` 用对象引用作 key（`Map`），若 `selected` 数组重建需注意引用一致性。
-- 镜像后 `grpName` 未加 `_inst` 后缀（`generateMapBin:2686` 对副本加了 `_inst`），M3 简化未加——若要严格兼容编辑器可补上。
+### 5.2 已修复的 bug
+- `buildMaterials` 中 `p.textures` / `p.name` 应为 `p.prop.textures` / `p.prop.name`（p 是包装对象）
 
-### 5.3 用真实编辑器验证（重要）
-最权威的验证：把 `serializeMapBin` 生成的 map.bin 放到 `testanki1.github.io/maps/` 下，用 `editor.html` 加载，确认能正常显示。这能发现格式细节问题。
+### 5.3 架构转变：从独立工具 → Kun Skill
+用户决定最终成品为一个 **Kun skill 工作区文件夹**，而非独立工具/网页。架构变为：
+- **Agent 自身的 LLM 能力** 负责自然语言→高层参数 JSON（不绑定特定 LLM API）
+- **SKILL.md** 提供完整知识库（道具目录/真实地图参考/参数schema/few-shot示例）
+- **引擎代码** 负责布局+序列化（layout.js + serialize-map-bin.js）
+- **数据文件** 提供资源对照（library_catalog.json / resource_urls.json / map_references.json）
+
+### 5.4 真实地图布局参考
+下载并分析了 14 张原版地图，关键发现：
+- 地图 x 远大于 z（6-40 倍），非正方形
+- 道具以草地/地形为主（Grass_S/M/L 占 50-80%）
+- 真实地图 2000-10000 props，SIZE_BOUNDS 已更新为真实尺度
+- 真实地图大量 prop 名称不在库索引中（子组件 `-sub-N` / 小写 `grass_S`）
+
+### 5.5 仍待完善
+- 用真实编辑器 `editor.html` 加载生成的 map.bin 做视觉验证
+- `libName` 确认（真实 Highland 全为空字符串，当前代码已匹配）
+- 镜像后 `grpName` 未加 `_inst` 后缀（可按需补上）
 
 ---
 
