@@ -219,8 +219,10 @@ node test/verify-layout.js      # M3 布局层端到端（20/20）
 | `data/library_catalog.json` | 道具目录（按类别分组，供 Agent 参考） |
 | `data/library_index.json` | 完整道具索引（含 URL/mesh/贴图） |
 | `data/map_references.json` | 14 张真实地图布局分析数据 |
+| `data/resource_urls.json` | 资源 URL 对照表（库 URL + 参考地图 URL + 资源路径规则） |
 | `test/verify-roundtrip.js` | 序列化往返测试 |
 | `test/verify-layout.js` | 布局层端到端测试 |
+| `tools/analyze-maps.js` | 批量下载+解析真实地图的工具脚本 |
 
 ## 8. 注意事项
 
