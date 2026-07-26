@@ -204,4 +204,39 @@ function extractPropsCompact(parsed) {
   }));
 }
 
-module.exports = { BinaryStream, unwrapPacket, parseMapBin, extractCollisionCompact, extractPropsCompact };
+const AIRWALL_THRESHOLD = 800;
+
+function shapeCenter(d, type) {
+  if (type === 1) return [d[0], d[1], d[2]];
+  return [d.data[0], d.data[1], d.data[2]];
+}
+
+function dist3(a, b) {
+  const dx = a[0] - b[0], dy = a[1] - b[1], dz = a[2] - b[2];
+  return Math.sqrt(dx * dx + dy * dy + dz * dz);
+}
+
+function identifyAirwalls(parsed, threshold) {
+  const t = threshold || AIRWALL_THRESHOLD;
+  const propPositions = parsed.props.map(p => p.pos);
+  const isAirwall = (center) => {
+    let min = Infinity;
+    for (const pp of propPositions) {
+      const d = dist3(center, pp);
+      if (d < min) min = d;
+    }
+    return min > t;
+  };
+  const mark = (col) => {
+    const a1 = col.shapesType1.map(d => isAirwall(shapeCenter(d, 1)));
+    const a2 = col.shapesType2.map(d => isAirwall(shapeCenter(d, 2)));
+    const a3 = col.shapesType3.map(d => isAirwall(shapeCenter(d, 3)));
+    return { airwall1: a1, airwall2: a2, airwall3: a3 };
+  };
+  return {
+    collisionData1: mark(parsed.collisionData1),
+    collisionData2: mark(parsed.collisionData2)
+  };
+}
+
+module.exports = { BinaryStream, unwrapPacket, parseMapBin, extractCollisionCompact, extractPropsCompact, identifyAirwalls };

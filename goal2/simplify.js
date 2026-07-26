@@ -6,7 +6,7 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 
-const { parseMapBin, extractCollisionCompact, extractPropsCompact } = require('./src/parseMapBin');
+const { parseMapBin, extractCollisionCompact, extractPropsCompact, identifyAirwalls } = require('./src/parseMapBin');
 const { generatePreviewHTML } = require('./src/generatePreview');
 
 const OUT_DIR = path.join(__dirname, 'out');
@@ -132,10 +132,16 @@ async function main() {
 
   const collision = extractCollisionCompact(parsed);
   const props = extractPropsCompact(parsed);
+  const airwalls = identifyAirwalls(parsed);
+  const aw1 = airwalls.collisionData1;
+  const aw2 = airwalls.collisionData2;
+  const aw1Count = aw1.airwall1.filter(Boolean).length + aw1.airwall2.filter(Boolean).length + aw1.airwall3.filter(Boolean).length;
+  const aw2Count = aw2.airwall1.filter(Boolean).length + aw2.airwall2.filter(Boolean).length + aw2.airwall3.filter(Boolean).length;
+  console.log(`空气墙识别: 组1=${aw1Count} 个, 组2=${aw2Count} 个 (阈值=800)`);
   const meta = { mapName, source: input, parsedAt: new Date().toISOString() };
 
   console.log('生成预览 HTML ...');
-  const html = generatePreviewHTML(collision, props, meta);
+  const html = generatePreviewHTML(collision, props, airwalls, meta);
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, html, 'utf8');
