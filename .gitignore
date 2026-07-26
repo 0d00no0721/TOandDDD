@@ -1,0 +1,33 @@
+# 游戏资源（不纳入仓库，运行时从 CDN 或本地样本读取）
+*.a3d
+*.bin
+*.webp
+*.png
+*.jpg
+*.jpeg
+*.ktx
+*.exr
+*.opus
+*.mp3
+*.lrc
+*.glb
+*.gltf
+# 但允许本地小体积测试输出
+!reference/**
+!docs/**
+
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+*.log
+
+# 环境与秘密
+.env
+.env.local
+*.key
+*.pem
+
+# 系统
+.DS_Store
+Thumbs.db
