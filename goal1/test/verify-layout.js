@@ -22,9 +22,9 @@ const index = JSON.parse(readFileSync(join(ROOT, 'data', 'library_index.json'), 
 const indexPropNames = new Set(index.props.map(p => `${p.libId}:${p.name}`));
 
 const SIZE_BOUNDS = {
-    small:  { half: 800 },
-    medium: { half: 1500 },
-    large:  { half: 2500 },
+    small:  { halfX: 28000, halfZ: 2300 },
+    medium: { halfX: 90000, halfZ: 4600 },
+    large:  { halfX: 115000, halfZ: 7000 },
 };
 
 console.log('=== M3 过程化布局层验证 ===\n');
@@ -66,12 +66,13 @@ console.log('\n[3] 对称镜像：props 数量 = 选取数 × 2');
 console.log('\n[4] 坐标范围检查');
 {
     const layout = generateDefaultLayout();
-    const half = SIZE_BOUNDS.small.half;
+    const halfX = SIZE_BOUNDS.small.halfX;
+    const halfZ = SIZE_BOUNDS.small.halfZ;
     let outOfBounds = 0;
     for (const p of layout.props) {
-        if (Math.abs(p.pos[0]) > half || Math.abs(p.pos[2]) > half) outOfBounds++;
+        if (Math.abs(p.pos[0]) > halfX || Math.abs(p.pos[2]) > halfZ) outOfBounds++;
     }
-    assert(outOfBounds === 0, `所有 prop 的 x/z 在 [-${half}, ${half}] 内（${outOfBounds} 个越界）`);
+    assert(outOfBounds === 0, `所有 prop 的 x/z 在 [-${halfX}, ${halfX}]/[-${halfZ}, ${halfZ}] 内（${outOfBounds} 个越界）`);
     // y 应为 0（贴地）
     let yOk = 0;
     for (const p of layout.props) if (p.pos[1] === 0) yOk++;
@@ -117,12 +118,13 @@ console.log('\n[7] 自定义参数（large/非对称/scattered）');
     });
     // 非对称 → 无镜像副本 → props 数量 = 选取数
     assert(layout.props.length === 30, `非对称 props 数量 = 30（实际 ${layout.props.length}）`);
-    const half = SIZE_BOUNDS.large.half;
+    const halfX = SIZE_BOUNDS.large.halfX;
+    const halfZ = SIZE_BOUNDS.large.halfZ;
     let outOfBounds = 0;
     for (const p of layout.props) {
-        if (Math.abs(p.pos[0]) > half || Math.abs(p.pos[2]) > half) outOfBounds++;
+        if (Math.abs(p.pos[0]) > halfX || Math.abs(p.pos[2]) > halfZ) outOfBounds++;
     }
-    assert(outOfBounds === 0, `large 尺寸坐标在 [-${half}, ${half}] 内（${outOfBounds} 个越界）`);
+    assert(outOfBounds === 0, `large 尺寸坐标在 [-${halfX}, ${halfX}]/[-${halfZ}, ${halfZ}] 内（${outOfBounds} 个越界）`);
 
     // 端到端序列化
     const bin = serializeMapBin(layout);

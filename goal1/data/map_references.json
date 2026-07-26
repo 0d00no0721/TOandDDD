@@ -1,0 +1,1185 @@
+[
+  {
+    "name": "Sandbox Summer Day",
+    "propCount": 4494,
+    "materialCount": 111,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -113000,
+        62830
+      ],
+      "y": [
+        -84700,
+        95300
+      ],
+      "z": [
+        -5100,
+        4100
+      ]
+    },
+    "mapSize": {
+      "w": 175830,
+      "h": 9200
+    },
+    "densityPerKm2": "2.8",
+    "categoryMix": {
+      "unknown": 4494
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SingleTextureShader": 50,
+      "TankiOnline/SpriteShader": 60
+    },
+    "libNameMix": {
+      "Remaster": 4494
+    },
+    "topProps": [
+      {
+        "name": "Grass_S",
+        "count": 1167
+      },
+      {
+        "name": "Grass_M",
+        "count": 706
+      },
+      {
+        "name": "Grass_L",
+        "count": 317
+      },
+      {
+        "name": "conc_fence",
+        "count": 201
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 138
+      },
+      {
+        "name": "Grass_flw_M",
+        "count": 112
+      },
+      {
+        "name": "bush2_LOD0",
+        "count": 105
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 90
+      },
+      {
+        "name": "Conc_slab_02",
+        "count": 86
+      },
+      {
+        "name": "Flower_A",
+        "count": 85
+      }
+    ],
+    "collisionCount": {
+      "col1": 4912,
+      "col2": 5967
+    }
+  },
+  {
+    "name": "Sandbox Summer Evening",
+    "propCount": 4494,
+    "materialCount": 111,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -113000,
+        62830
+      ],
+      "y": [
+        -84700,
+        95300
+      ],
+      "z": [
+        -5100,
+        4100
+      ]
+    },
+    "mapSize": {
+      "w": 175830,
+      "h": 9200
+    },
+    "densityPerKm2": "2.8",
+    "categoryMix": {
+      "unknown": 4494
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SingleTextureShader": 50,
+      "TankiOnline/SpriteShader": 60
+    },
+    "libNameMix": {
+      "Remaster": 4494
+    },
+    "topProps": [
+      {
+        "name": "Grass_S",
+        "count": 1167
+      },
+      {
+        "name": "Grass_M",
+        "count": 706
+      },
+      {
+        "name": "Grass_L",
+        "count": 317
+      },
+      {
+        "name": "conc_fence",
+        "count": 201
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 138
+      },
+      {
+        "name": "Grass_flw_M",
+        "count": 112
+      },
+      {
+        "name": "bush2_LOD0",
+        "count": 105
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 90
+      },
+      {
+        "name": "Conc_slab_02",
+        "count": 86
+      },
+      {
+        "name": "Flower_A",
+        "count": 85
+      }
+    ],
+    "collisionCount": {
+      "col1": 4912,
+      "col2": 5967
+    }
+  },
+  {
+    "name": "Sandbox Autumn",
+    "propCount": 4616,
+    "materialCount": 128,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -113000,
+        62830
+      ],
+      "y": [
+        -84700,
+        95300
+      ],
+      "z": [
+        -5100,
+        4100
+      ]
+    },
+    "mapSize": {
+      "w": 175830,
+      "h": 9200
+    },
+    "densityPerKm2": "2.9",
+    "categoryMix": {
+      "unknown": 4616
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SingleTextureShader": 50,
+      "TankiOnline/SpriteShader": 77
+    },
+    "libNameMix": {
+      "Remaster": 4616
+    },
+    "topProps": [
+      {
+        "name": "Grass_S_au",
+        "count": 1185
+      },
+      {
+        "name": "Grass_M_au",
+        "count": 714
+      },
+      {
+        "name": "Grass_L_au",
+        "count": 322
+      },
+      {
+        "name": "conc_fence",
+        "count": 201
+      },
+      {
+        "name": "bush1_au_LOD0",
+        "count": 138
+      },
+      {
+        "name": "Grass_flw_M_au",
+        "count": 112
+      },
+      {
+        "name": "bush2_au_LOD0",
+        "count": 105
+      },
+      {
+        "name": "tree1_au_LOD0",
+        "count": 90
+      },
+      {
+        "name": "Conc_slab_02",
+        "count": 86
+      },
+      {
+        "name": "Flower_A_au",
+        "count": 85
+      }
+    ],
+    "collisionCount": {
+      "col1": 4902,
+      "col2": 5892
+    }
+  },
+  {
+    "name": "Forest Summer Day",
+    "propCount": 6694,
+    "materialCount": 114,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -32000,
+        24500
+      ],
+      "y": [
+        -32000,
+        20900
+      ],
+      "z": [
+        -3000,
+        1634
+      ]
+    },
+    "mapSize": {
+      "w": 56500,
+      "h": 4634
+    },
+    "densityPerKm2": "25.6",
+    "categoryMix": {
+      "unknown": 6694
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SpriteShader": 63,
+      "TankiOnline/SingleTextureShader": 50
+    },
+    "libNameMix": {
+      "Remaster": 6694
+    },
+    "topProps": [
+      {
+        "name": "Grass_S",
+        "count": 2782
+      },
+      {
+        "name": "Grass_M",
+        "count": 829
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 264
+      },
+      {
+        "name": "Grass_L",
+        "count": 203
+      },
+      {
+        "name": "Flower_C",
+        "count": 180
+      },
+      {
+        "name": "Cliff_Corner",
+        "count": 166
+      },
+      {
+        "name": "Cliff_01",
+        "count": 164
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 161
+      },
+      {
+        "name": "Grass_flw_M",
+        "count": 118
+      },
+      {
+        "name": "Cliff_Corner_Inner",
+        "count": 116
+      }
+    ],
+    "collisionCount": {
+      "col1": 5460,
+      "col2": 15760
+    }
+  },
+  {
+    "name": "Forest Winter Day",
+    "propCount": 2049,
+    "materialCount": 102,
+    "atlasCount": 4,
+    "coordRange": {
+      "x": [
+        -32000,
+        24500
+      ],
+      "y": [
+        -32000,
+        20900
+      ],
+      "z": [
+        -3000,
+        1634
+      ]
+    },
+    "mapSize": {
+      "w": 56500,
+      "h": 4634
+    },
+    "densityPerKm2": "7.8",
+    "categoryMix": {
+      "unknown": 2049
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SpriteShader": 46,
+      "TankiOnline/SingleTextureShaderWinter": 34,
+      "TankiOnline/SingleTextureShader": 19,
+      "Universal Render Pipeline/Simple Lit": 2
+    },
+    "libNameMix": {
+      "Remaster": 2049
+    },
+    "topProps": [
+      {
+        "name": "bush1_sn_LOD0",
+        "count": 264
+      },
+      {
+        "name": "Cliff_01_sn",
+        "count": 166
+      },
+      {
+        "name": "Cliff_Corner_sn",
+        "count": 166
+      },
+      {
+        "name": "tree1_sn_LOD0",
+        "count": 161
+      },
+      {
+        "name": "Cliff_Corner_Inner_sn",
+        "count": 116
+      },
+      {
+        "name": "Conc_slab_02_sn",
+        "count": 88
+      },
+      {
+        "name": "bush2_sn_LOD0",
+        "count": 77
+      },
+      {
+        "name": "conc_fence_sn",
+        "count": 61
+      },
+      {
+        "name": "Tree_bdrop_sn",
+        "count": 55
+      },
+      {
+        "name": "Conc_slab_01_sn",
+        "count": 47
+      }
+    ],
+    "collisionCount": {
+      "col1": 5424,
+      "col2": 15784
+    }
+  },
+  {
+    "name": "Sandal Summer Day",
+    "propCount": 7487,
+    "materialCount": 127,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -104600,
+        103500
+      ],
+      "y": [
+        -83820,
+        75100
+      ],
+      "z": [
+        -3000,
+        6911
+      ]
+    },
+    "mapSize": {
+      "w": 208100,
+      "h": 9911
+    },
+    "densityPerKm2": "3.6",
+    "categoryMix": {
+      "unknown": 7487
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SingleTextureShader": 70,
+      "TankiOnline/SpriteShader": 56
+    },
+    "libNameMix": {
+      "Remaster": 7487
+    },
+    "topProps": [
+      {
+        "name": "Grass_S",
+        "count": 1458
+      },
+      {
+        "name": "Grass_M",
+        "count": 616
+      },
+      {
+        "name": "Flower_C",
+        "count": 299
+      },
+      {
+        "name": "Grass_L",
+        "count": 293
+      },
+      {
+        "name": "Industrial_Wall_Flat",
+        "count": 157
+      },
+      {
+        "name": "Industrial_Roof_M_sub0",
+        "count": 146
+      },
+      {
+        "name": "Industrial_Roof_M_sub1",
+        "count": 146
+      },
+      {
+        "name": "Industrial_Roof_M_sub2",
+        "count": 146
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_sub0",
+        "count": 131
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_sub1",
+        "count": 131
+      }
+    ],
+    "collisionCount": {
+      "col1": 5676,
+      "col2": 7346
+    }
+  },
+  {
+    "name": "Sandal Autumn",
+    "propCount": 7582,
+    "materialCount": 129,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -104600,
+        103500
+      ],
+      "y": [
+        -83820,
+        75100
+      ],
+      "z": [
+        -3000,
+        6911
+      ]
+    },
+    "mapSize": {
+      "w": 208100,
+      "h": 9911
+    },
+    "densityPerKm2": "3.7",
+    "categoryMix": {
+      "unknown": 7582
+    },
+    "shaderMix": {
+      "TankiOnline/Terrain": 1,
+      "TankiOnline/SingleTextureShader": 70,
+      "TankiOnline/SpriteShader": 58
+    },
+    "libNameMix": {
+      "Remaster": 7582
+    },
+    "topProps": [
+      {
+        "name": "Grass_S_au",
+        "count": 1458
+      },
+      {
+        "name": "Grass_M_au",
+        "count": 616
+      },
+      {
+        "name": "Flower_C_au",
+        "count": 299
+      },
+      {
+        "name": "Grass_L_au",
+        "count": 293
+      },
+      {
+        "name": "Industrial_Wall_Flat",
+        "count": 157
+      },
+      {
+        "name": "Industrial_Roof_M_sub0",
+        "count": 146
+      },
+      {
+        "name": "Industrial_Roof_M_sub1",
+        "count": 146
+      },
+      {
+        "name": "Industrial_Roof_M_sub2",
+        "count": 146
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_sub0",
+        "count": 131
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_sub1",
+        "count": 131
+      }
+    ],
+    "collisionCount": {
+      "col1": 5676,
+      "col2": 7346
+    }
+  },
+  {
+    "name": "Highland Summer Day",
+    "propCount": 6875,
+    "materialCount": 81,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -259600,
+        156000
+      ],
+      "y": [
+        -193100,
+        201700
+      ],
+      "z": [
+        -42703,
+        3040
+      ]
+    },
+    "mapSize": {
+      "w": 415600,
+      "h": 45743
+    },
+    "densityPerKm2": "0.4",
+    "categoryMix": {
+      "unknown": 5962,
+      "decoration": 6,
+      "other": 17,
+      "structure": 180,
+      "natural": 685,
+      "terrain": 25
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 66,
+      "TankiOnline/SpriteShader": 14,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 6875
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 1477
+      },
+      {
+        "name": "grass_M",
+        "count": 602
+      },
+      {
+        "name": "grass_L",
+        "count": 429
+      },
+      {
+        "name": "Grass_Tilted_S",
+        "count": 336
+      },
+      {
+        "name": "flower_a",
+        "count": 244
+      },
+      {
+        "name": "Grass_Tilted_S2",
+        "count": 184
+      },
+      {
+        "name": "Trees_bdrop",
+        "count": 181
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 171
+      },
+      {
+        "name": "Cliff_Corner",
+        "count": 83
+      },
+      {
+        "name": "Conc_slab02",
+        "count": 79
+      }
+    ],
+    "collisionCount": {
+      "col1": 5070,
+      "col2": 2748
+    }
+  },
+  {
+    "name": "Highland Summer Evening",
+    "propCount": 6875,
+    "materialCount": 81,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -259600,
+        156000
+      ],
+      "y": [
+        -193100,
+        201700
+      ],
+      "z": [
+        -42703,
+        3040
+      ]
+    },
+    "mapSize": {
+      "w": 415600,
+      "h": 45743
+    },
+    "densityPerKm2": "0.4",
+    "categoryMix": {
+      "unknown": 5962,
+      "decoration": 6,
+      "other": 17,
+      "structure": 180,
+      "natural": 685,
+      "terrain": 25
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 66,
+      "TankiOnline/SpriteShader": 14,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 6875
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 1477
+      },
+      {
+        "name": "grass_M",
+        "count": 602
+      },
+      {
+        "name": "grass_L",
+        "count": 429
+      },
+      {
+        "name": "Grass_Tilted_S",
+        "count": 336
+      },
+      {
+        "name": "flower_a",
+        "count": 244
+      },
+      {
+        "name": "Grass_Tilted_S2",
+        "count": 184
+      },
+      {
+        "name": "Trees_bdrop",
+        "count": 181
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 171
+      },
+      {
+        "name": "Cliff_Corner",
+        "count": 83
+      },
+      {
+        "name": "Conc_slab02",
+        "count": 79
+      }
+    ],
+    "collisionCount": {
+      "col1": 5070,
+      "col2": 2748
+    }
+  },
+  {
+    "name": "Highland Autumn",
+    "propCount": 6908,
+    "materialCount": 83,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -259600,
+        156000
+      ],
+      "y": [
+        -193100,
+        201700
+      ],
+      "z": [
+        -42703,
+        3040
+      ]
+    },
+    "mapSize": {
+      "w": 415600,
+      "h": 45743
+    },
+    "densityPerKm2": "0.4",
+    "categoryMix": {
+      "unknown": 5995,
+      "decoration": 6,
+      "other": 17,
+      "structure": 180,
+      "natural": 685,
+      "terrain": 25
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 66,
+      "TankiOnline/SpriteShader": 16,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 6908
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 1477
+      },
+      {
+        "name": "grass_M",
+        "count": 602
+      },
+      {
+        "name": "grass_L",
+        "count": 429
+      },
+      {
+        "name": "Grass_Tilted_S",
+        "count": 336
+      },
+      {
+        "name": "flower_a",
+        "count": 244
+      },
+      {
+        "name": "Grass_Tilted_S2",
+        "count": 184
+      },
+      {
+        "name": "Trees_bdrop",
+        "count": 181
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 171
+      },
+      {
+        "name": "Cliff_Corner",
+        "count": 83
+      },
+      {
+        "name": "Conc_slab02",
+        "count": 79
+      }
+    ],
+    "collisionCount": {
+      "col1": 5070,
+      "col2": 2748
+    }
+  },
+  {
+    "name": "Cross Summer Day",
+    "propCount": 9377,
+    "materialCount": 86,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -133400,
+        95600
+      ],
+      "y": [
+        -123000,
+        163900
+      ],
+      "z": [
+        -10500,
+        3557
+      ]
+    },
+    "mapSize": {
+      "w": 229000,
+      "h": 14057
+    },
+    "densityPerKm2": "2.9",
+    "categoryMix": {
+      "unknown": 8410,
+      "other": 24,
+      "structure": 416,
+      "terrain": 54,
+      "decoration": 6,
+      "natural": 467
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 75,
+      "TankiOnline/SpriteShader": 10,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 9377
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 3614
+      },
+      {
+        "name": "grass_M",
+        "count": 1401
+      },
+      {
+        "name": "grass_L",
+        "count": 469
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 215
+      },
+      {
+        "name": "wall_new_st_LOD0",
+        "count": 151
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 142
+      },
+      {
+        "name": "Conc_slab01",
+        "count": 103
+      },
+      {
+        "name": "Trees_bdrop",
+        "count": 101
+      },
+      {
+        "name": "road_square6",
+        "count": 97
+      },
+      {
+        "name": "road_crumb1",
+        "count": 78
+      }
+    ],
+    "collisionCount": {
+      "col1": 7680,
+      "col2": 2523
+    }
+  },
+  {
+    "name": "Cross Autumn",
+    "propCount": 9372,
+    "materialCount": 86,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -133400,
+        95600
+      ],
+      "y": [
+        -123000,
+        163900
+      ],
+      "z": [
+        -10500,
+        3557
+      ]
+    },
+    "mapSize": {
+      "w": 229000,
+      "h": 14057
+    },
+    "densityPerKm2": "2.9",
+    "categoryMix": {
+      "unknown": 8403,
+      "other": 24,
+      "structure": 416,
+      "terrain": 54,
+      "decoration": 6,
+      "natural": 469
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 75,
+      "TankiOnline/SpriteShader": 10,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 9372
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 3607
+      },
+      {
+        "name": "grass_M",
+        "count": 1401
+      },
+      {
+        "name": "grass_L",
+        "count": 469
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 215
+      },
+      {
+        "name": "wall_new_st_LOD0",
+        "count": 151
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 144
+      },
+      {
+        "name": "Conc_slab01",
+        "count": 103
+      },
+      {
+        "name": "Trees_bdrop",
+        "count": 101
+      },
+      {
+        "name": "road_square6",
+        "count": 97
+      },
+      {
+        "name": "road_crumb1",
+        "count": 78
+      }
+    ],
+    "collisionCount": {
+      "col1": 7680,
+      "col2": 2523
+    }
+  },
+  {
+    "name": "Parma Summer Day",
+    "propCount": 10029,
+    "materialCount": 83,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -228100,
+        140400
+      ],
+      "y": [
+        -168500,
+        164750
+      ],
+      "z": [
+        -9350,
+        13918
+      ]
+    },
+    "mapSize": {
+      "w": 368500,
+      "h": 23268
+    },
+    "densityPerKm2": "1.2",
+    "categoryMix": {
+      "unknown": 9111,
+      "structure": 431,
+      "other": 42,
+      "natural": 439,
+      "decoration": 6
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 72,
+      "TankiOnline/SpriteShader": 10,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 10029
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 3457
+      },
+      {
+        "name": "grass_M",
+        "count": 999
+      },
+      {
+        "name": "flower_c",
+        "count": 598
+      },
+      {
+        "name": "Grass_Tilted_S",
+        "count": 396
+      },
+      {
+        "name": "grass_L",
+        "count": 279
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 156
+      },
+      {
+        "name": "Conc_slab01",
+        "count": 150
+      },
+      {
+        "name": "Conc_slab02",
+        "count": 137
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 124
+      },
+      {
+        "name": "Marble_Floor_20x10",
+        "count": 121
+      }
+    ],
+    "collisionCount": {
+      "col1": 6698,
+      "col2": 1670
+    }
+  },
+  {
+    "name": "Parma Autumn",
+    "propCount": 10018,
+    "materialCount": 86,
+    "atlasCount": 2,
+    "coordRange": {
+      "x": [
+        -228100,
+        140400
+      ],
+      "y": [
+        -168500,
+        164750
+      ],
+      "z": [
+        -9350,
+        13918
+      ]
+    },
+    "mapSize": {
+      "w": 368500,
+      "h": 23268
+    },
+    "densityPerKm2": "1.2",
+    "categoryMix": {
+      "unknown": 9102,
+      "structure": 431,
+      "other": 42,
+      "decoration": 6,
+      "natural": 437
+    },
+    "shaderMix": {
+      "TankiOnline/SingleTextureShader": 75,
+      "TankiOnline/SpriteShader": 10,
+      "TankiOnline/Terrain": 1
+    },
+    "libNameMix": {
+      "": 10018
+    },
+    "topProps": [
+      {
+        "name": "grass_S",
+        "count": 3457
+      },
+      {
+        "name": "grass_M",
+        "count": 871
+      },
+      {
+        "name": "flower_a",
+        "count": 675
+      },
+      {
+        "name": "Grass_Tilted_S",
+        "count": 396
+      },
+      {
+        "name": "grass_L",
+        "count": 279
+      },
+      {
+        "name": "bush1_LOD0",
+        "count": 156
+      },
+      {
+        "name": "Conc_slab01",
+        "count": 150
+      },
+      {
+        "name": "Conc_slab02",
+        "count": 137
+      },
+      {
+        "name": "tree1_LOD0",
+        "count": 124
+      },
+      {
+        "name": "Marble_Floor_20x10",
+        "count": 121
+      }
+    ],
+    "collisionCount": {
+      "col1": 6698,
+      "col2": 1670
+    }
+  }
+]

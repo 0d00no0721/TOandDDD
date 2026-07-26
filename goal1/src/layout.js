@@ -22,13 +22,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
 // ---------- 配置 ----------
+// 基于真实地图实测数据（Forest/Sandbox/Cross/Parma/Highland）
+// 真实地图 x 远大于 z，非正方形
 const SIZE_BOUNDS = {
-    small:  { half: 800,  yMax: 300 },   // 1600×1600
-    medium: { half: 1500, yMax: 500 },   // 3000×3000
-    large:  { half: 2500, yMax: 800 },   // 5000×5000
+    small:  { halfX: 28000,  halfZ: 2300,  yMax: 500 },   // ~Forest 尺度
+    medium: { halfX: 90000,  halfZ: 4600,  yMax: 800 },   // ~Sandbox 尺度
+    large:  { halfX: 115000, halfZ: 7000,  yMax: 1000 },  // ~Cross 尺度
 };
 
-const DENSITY_COUNT = { low: 30, medium: 70, high: 130 };
+// 生成地图的道具数量（真实地图 2000-10000，生成器用较少量即可）
+const DENSITY_COUNT = { low: 50, medium: 150, high: 300 };
 
 // 简易确定性 PRNG（seeded，便于复现）
 function mulberry32(seed) {
@@ -118,7 +121,7 @@ function buildMaterials(propsWithLib) {
 // clustered: 聚团（一个中心点附近）
 // grid: 网格均匀分布
 function placeProp(prop, placement, bounds, rng, occupied) {
-    const { half } = bounds;
+    const { halfX, halfZ } = bounds;
     const margin = 50;
     let x, z;
     let attempts = 0;
@@ -128,33 +131,34 @@ function placeProp(prop, placement, bounds, rng, occupied) {
                 // 沿四条边随机
                 const side = Math.floor(rng() * 4);
                 const t = rng() * 2 - 1;
-                if (side === 0) { x = t * half; z = -half + margin; }
-                else if (side === 1) { x = t * half; z = half - margin; }
-                else if (side === 2) { x = -half + margin; z = t * half; }
-                else { x = half - margin; z = t * half; }
+                if (side === 0) { x = t * halfX; z = -halfZ + margin; }
+                else if (side === 1) { x = t * halfX; z = halfZ - margin; }
+                else if (side === 2) { x = -halfX + margin; z = t * halfZ; }
+                else { x = halfX - margin; z = t * halfZ; }
                 break;
             }
             case 'clustered': {
                 // 围绕中心聚团
-                const cx = (rng() - 0.5) * half * 0.3;
-                const cz = (rng() - 0.5) * half * 0.3;
-                x = cx + (rng() - 0.5) * half * 0.4;
-                z = cz + (rng() - 0.5) * half * 0.4;
+                const cx = (rng() - 0.5) * halfX * 0.3;
+                const cz = (rng() - 0.5) * halfZ * 0.3;
+                x = cx + (rng() - 0.5) * halfX * 0.4;
+                z = cz + (rng() - 0.5) * halfZ * 0.4;
                 break;
             }
             case 'grid': {
-                const cells = Math.ceil(Math.sqrt(64));
-                const step = (half * 2) / cells;
+                const cells = 8;
+                const stepX = (halfX * 2) / cells;
+                const stepZ = (halfZ * 2) / cells;
                 const ci = Math.floor(rng() * cells);
                 const cj = Math.floor(rng() * cells);
-                x = -half + ci * step + step / 2 + (rng() - 0.5) * step * 0.3;
-                z = -half + cj * step + step / 2 + (rng() - 0.5) * step * 0.3;
+                x = -halfX + ci * stepX + stepX / 2 + (rng() - 0.5) * stepX * 0.3;
+                z = -halfZ + cj * stepZ + stepZ / 2 + (rng() - 0.5) * stepZ * 0.3;
                 break;
             }
             case 'scattered':
             default: {
-                x = (rng() - 0.5) * half * 1.8;
-                z = (rng() - 0.5) * half * 1.8;
+                x = (rng() - 0.5) * halfX * 1.8;
+                z = (rng() - 0.5) * halfZ * 1.8;
             }
         }
         attempts++;
