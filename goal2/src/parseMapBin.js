@@ -239,4 +239,134 @@ function identifyAirwalls(parsed, threshold) {
   };
 }
 
-module.exports = { BinaryStream, unwrapPacket, parseMapBin, extractCollisionCompact, extractPropsCompact, identifyAirwalls };
+class BinaryWriter {
+  constructor() { this.chunks = []; this.length = 0; }
+  writeUint8(v) { const b = Buffer.allocUnsafe(1); b.writeUInt8(v, 0); this._add(b); }
+  writeUint16(v, le = false) { const b = Buffer.allocUnsafe(2); le ? b.writeUInt16LE(v, 0) : b.writeUInt16BE(v, 0); this._add(b); }
+  writeUint32(v, le = false) { const b = Buffer.allocUnsafe(4); le ? b.writeUInt32LE(v, 0) : b.writeUInt32BE(v, 0); this._add(b); }
+  writeInt32(v, le = false) { const b = Buffer.allocUnsafe(4); le ? b.writeInt32LE(v, 0) : b.writeInt32BE(v, 0); this._add(b); }
+  writeFloat32(v, le = false) { const b = Buffer.allocUnsafe(4); le ? b.writeFloatLE(v, 0) : b.writeFloatBE(v, 0); this._add(b); }
+  writeFloat64(v, le = false) { const b = Buffer.allocUnsafe(8); le ? b.writeDoubleLE(v, 0) : b.writeDoubleBE(v, 0); this._add(b); }
+  writeBytes(b) { this._add(Buffer.from(b)); }
+  writeStringLength(len) {
+    if (len <= 0x7f) { this.writeUint8(len); }
+    else if (len <= 0x3fff) { this.writeUint8(0x80 | (len >> 8)); this.writeUint8(len & 0xff); }
+    else { this.writeUint8(0xc0 | (len >> 16)); this.writeUint16(len & 0xffff, false); }
+  }
+  writeString(str) { const bytes = Buffer.from(str, 'utf8'); this.writeStringLength(bytes.length); this.writeBytes(bytes); }
+  _add(b) { this.chunks.push(b); this.length += b.length; }
+  toBuffer() { return Buffer.concat(this.chunks, this.length); }
+}
+
+function writeCollisionData(bw, col) {
+  bw.writeStringLength(col.shapesType1.length);
+  for (const d of col.shapesType1) {
+    for (let i = 0; i < 9; i++) bw.writeFloat32(d[i], false);
+  }
+  bw.writeStringLength(col.shapesType2.length);
+  for (const d of col.shapesType2) {
+    bw.writeFloat64(d.f1, false);
+    for (let i = 0; i < 6; i++) bw.writeFloat32(d.data[i], false);
+    bw.writeFloat64(d.f2, false);
+  }
+  bw.writeStringLength(col.shapesType3.length);
+  for (const d of col.shapesType3) {
+    bw.writeFloat64(d.f1, false);
+    for (let i = 0; i < 15; i++) bw.writeFloat32(d.data[i], false);
+  }
+}
+
+function writeOptionBits(bw, bits) {
+  const used = bits.filter(b => b !== undefined);
+  if (used.length <= 5) {
+    let flags = 0;
+    for (let i = 0; i < used.length; i++) {
+      if (!used[i]) flags |= (1 << (7 - i - 3));
+    }
+    bw.writeUint8(flags);
+  } else {
+    const bitCount = used.length;
+    const extCount = Math.ceil((bitCount - 5) / 8);
+    let flags = 0x80;
+    if (extCount <= 0x3f) {
+      flags |= extCount;
+      bw.writeUint8(flags);
+    } else {
+      flags |= 0x40;
+      bw.writeUint8(flags);
+      bw.writeUint16(extCount & 0xffff, false);
+    }
+    const allBytes = Buffer.alloc(extCount + 1, 0);
+    for (let i = 0; i < bitCount; i++) {
+      if (!used[i]) {
+        const bitIndex = i + 3;
+        const byteIdx = Math.floor(bitIndex / 8);
+        const bitInByte = 7 - (bitIndex % 8);
+        if (byteIdx === 0) {
+          flags |= (1 << bitInByte);
+        } else {
+          allBytes[byteIdx - 1] |= (1 << bitInByte);
+        }
+      }
+    }
+    bw.writeBytes(allBytes.subarray(0, extCount));
+  }
+}
+
+function generateSimplifiedMapBin(parsed) {
+  const bw = new BinaryWriter();
+
+  const hasAtlases = Object.keys(parsed.atlases).length > 0;
+  const hasUnknownArr = false;
+  const hasUnknown28 = false;
+  const bits = [hasAtlases, hasUnknownArr, undefined, undefined, undefined, hasUnknown28];
+  writeOptionBits(bw, bits);
+
+  if (hasAtlases) {
+    bw.writeStringLength(0);
+  }
+
+  writeCollisionData(bw, parsed.collisionData1);
+  writeCollisionData(bw, parsed.collisionData2);
+
+  bw.writeStringLength(0);
+
+  if (hasUnknown28) {
+    bw.writeStringLength(0);
+  }
+
+  bw.writeStringLength(0);
+
+  const payload = bw.toBuffer();
+  const outer = new BinaryWriter();
+  const len = payload.length;
+  let compressed = false;
+  let compData = null;
+  try {
+    compData = zlib.deflateSync(payload);
+    if (compData.length < len) compressed = true;
+  } catch (e) {}
+
+  let flags = 0;
+  if (compressed) flags |= 0x40;
+  const dataToWrite = compressed ? compData : payload;
+  const dataLen = dataToWrite.length;
+
+  if (dataLen <= 0x3fff) {
+    flags |= (dataLen >> 8) & 0x3f;
+    outer.writeUint8(flags);
+    outer.writeUint8(dataLen & 0xff);
+  } else {
+    flags |= 0x80;
+    flags |= Math.floor(dataLen / 16777216) & 0x3f;
+    outer.writeUint8(flags);
+    outer.writeUint8((dataLen >> 16) & 0xff);
+    outer.writeUint8((dataLen >> 8) & 0xff);
+    outer.writeUint8(dataLen & 0xff);
+  }
+  outer.writeBytes(dataToWrite);
+
+  return outer.toBuffer();
+}
+
+module.exports = { BinaryStream, BinaryWriter, unwrapPacket, parseMapBin, extractCollisionCompact, extractPropsCompact, identifyAirwalls, generateSimplifiedMapBin };
