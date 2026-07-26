@@ -1,2 +1,5 @@
-out/
+# out/ 目录保留上传（含 HTML 预览和 library 简化地图）
+!out/
+!out/**
+!out/library/**
 !simplified-maps/*.bin
