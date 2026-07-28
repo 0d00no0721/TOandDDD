@@ -7,9 +7,12 @@
   "bin": { "tanki-map": "src/generate.js" },
   "scripts": {
     "build-index": "node src/library-index.js",
-    "test": "node test/verify-roundtrip.js",
     "generate": "node src/generate.js",
-    "verify": "node test/verify-roundtrip.js"
+    "test": "node test/verify-roundtrip.js && node test/verify-layout.js && node test/verify-llm.js && node test/verify-generate.js",
+    "test:m2": "node test/verify-roundtrip.js",
+    "test:m3": "node test/verify-layout.js",
+    "test:m4": "node test/verify-llm.js",
+    "test:m5": "node test/verify-generate.js"
   },
   "engines": { "node": ">=18" },
   "dependencies": {}

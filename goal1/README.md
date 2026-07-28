@@ -32,11 +32,11 @@ map-generator/
 
 ## 里程碑
 
-- [x] **M2 序列化层基础**：`binary-writer.js` + `parse-map-bin.js` + `serialize-map-bin.js`
-- [x] **M1 道具库索引**：`library-index.js` 下载并解析 2 个 library.json
-- [ ] **M3 过程化布局层**：`layout.js`
-- [ ] **M4 LLM 理解层**：`llm-layer.js`
-- [ ] **M5 集成与界面**：`generate.js`
+- [x] **M1 道具库索引**：`library-index.js` 下载并解析 2 个 library.json（1146 props，6 语义类别）
+- [x] **M2 序列化层**：`binary-writer.js` + `parse-map-bin.js` + `serialize-map-bin.js`（21/21 往返测试通过）
+- [x] **M3 过程化布局层**：`layout.js`（20/20 端到端测试通过）
+- [x] **M4 LLM 理解层**：`llm-layer.js`（多提供商 + 离线模式）
+- [x] **M5 CLI 集成界面**：`generate.js`（端到端 CLI 入口）
 
 ## 复用来源
 
@@ -52,6 +52,25 @@ map-generator/
 # 构建 prop 索引（首次运行，需联网下载 library.json）
 node src/library-index.js
 
-# 端到端生成（M5 完成后）
-node src/generate.js "两座对称山丘、中间一条沟、适合1v1的小图"
+# 离线模式（无需 LLM，用默认参数）
+node src/generate.js "两座对称山丘" --no-llm
+
+# 使用 OpenAI
+export OPENAI_API_KEY=sk-xxx
+node src/generate.js "工业仓库大图" --provider openai --model gpt-4o-mini
+
+# 使用本地模型（Ollama）
+node src/generate.js "雪地小图" --provider local --model llama3 --base-url http://localhost:11434/v1
+
+# 指定输出路径和种子
+node src/generate.js "描述" --no-llm --output output/mymap.bin --seed 42
+
+# 列出可用模型
+node src/generate.js --list-models
+
+# 帮助
+node src/generate.js --help
+
+# 运行全部测试
+npm test
 ```
