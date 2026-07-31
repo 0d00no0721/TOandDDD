@@ -1,0 +1,6 @@
+Collision Overlay Log Server
+  Port:     3456
+  Log file: E:\DDD\TOandDDD\goal2.2\logs\collision-overlay-20260731-163708.log
+  Endpoints: POST /log, POST /upload, GET /status
+  CORS:     enabled (all origins)
+

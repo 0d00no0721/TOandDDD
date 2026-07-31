@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>Collision Overlay Local Test (v2.3 core)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  body { margin:0; background:#111; color:#eee; font-family:monospace; overflow:hidden; }
+  #canvas { display:block; }
+  #hud {
+    position:fixed; top:8px; left:8px; background:rgba(0,10,30,0.92); color:#00ccff;
+    border:1px solid rgba(0,204,255,0.3); border-radius:8px; padding:8px 12px;
+    font-size:12px; max-width:420px; z-index:10; pointer-events:none; user-select:none;
+  }
+  #hud div { margin-top:2px; }
+  #load { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; font-size:18px; color:#00ccff; }
+</style>
+</head>
+<body>
+<div id="load">Loading map.bin ...</div>
+<canvas id="canvas"></canvas>
+<div id="hud" style="display:none;"></div>
+
+<script>
+'use strict';
+
+var canvas = document.getElementById('canvas');
+var hud = document.getElementById('hud');
+
+// ═══ Shared core (kept in sync with map-simplifier-v2.3.user.js) ═══
+
+function BinaryStream(buffer) {
+  if (buffer instanceof Uint8Array) this.bytes = buffer;
+  else if (buffer instanceof ArrayBuffer) this.bytes = new Uint8Array(buffer);
+  else this.bytes = new Uint8Array(buffer);
+  this.dv = new DataView(this.bytes.buffer, this.bytes.byteOffset, this.bytes.byteLength);
+  this.offset = 0;
+}
+BinaryStream.prototype.readUint8 = function() { return this.dv.getUint8(this.offset++); };
+BinaryStream.prototype.readUint16 = function(le) { var v = this.dv.getUint16(this.offset, !!le); this.offset += 2; return v; };
+BinaryStream.prototype.readUint32 = function(le) { var v = this.dv.getUint32(this.offset, !!le); this.offset += 4; return v; };
+BinaryStream.prototype.readInt32 = function(le) { var v = this.dv.getInt32(this.offset, !!le); this.offset += 4; return v; };
+BinaryStream.prototype.readFloat32 = function(le) { var v = this.dv.getFloat32(this.offset, !!le); this.offset += 4; return v; };
+BinaryStream.prototype.readFloat64 = function(le) { var v = this.dv.getFloat64(this.offset, !!le); this.offset += 8; return v; };
+BinaryStream.prototype.readBytes = function(len) { var v = this.bytes.subarray(this.offset, this.offset + len); this.offset += len; return v; };
+BinaryStream.prototype.readStringLength = function() {
+  var flags = this.readUint8();
+  if ((flags & 0x80) === 0) return flags & 0x7f;
+  if ((flags & 0x40) === 0) return ((flags & 0x3f) << 8) + this.readUint8();
+  return ((flags & 0x3f) << 16) + this.readUint16(false);
+};
+BinaryStream.prototype.readString = function() {
+  var bytes = this.readBytes(this.readStringLength());
+  return new TextDecoder('utf-8').decode(bytes);
+};
+
+function unwrapPacket(stream) {
+  var flags = stream.readUint8();
+  var compressed = (flags & 0x40) > 0;
+  var len = 0;
+  if ((flags & 0x80) === 0) len = stream.readUint8() + ((flags & 0x3f) << 8);
+  else { var b1 = stream.readUint8(), b2 = stream.readUint8(), b3 = stream.readUint8(); len = (b1 << 16) | (b2 << 8) | b3; len += (flags & 0x3f) * 16777216; }
+  var data = stream.readBytes(len);
+  if (compressed && typeof pako !== 'undefined') {
+    try { data = pako.inflate(data); }
+    catch (e) { try { data = pako.inflateRaw(data); } catch(e2) {} }
+  }
+  return new BinaryStream(data);
+}
+
+function readOptionBitsRaw(packet) {
+  var bits = [];
+  var flags = packet.readUint8();
+  if ((flags & 0x80) === 0) {
+    var intBits = flags << 3;
+    for (var i = 7; i >= 3; i--) bits.push((intBits & (1 << i)) === 0);
+    var extCount = (flags & 0x60) >> 5;
+    var extBytes = packet.readBytes(extCount);
+    for (var ie = 0; ie < extBytes.length; ie++)
+      for (var b = 7; b >= 0; b--) bits.push((extBytes[ie] & (1 << b)) === 0);
+  } else {
+    var extCount2 = ((flags & 0x40) === 0) ? (flags & 0x3f) : (((flags & 0x3f) << 16) + packet.readUint16(false));
+    var extBytes2 = packet.readBytes(extCount2);
+    for (var ie2 = 0; ie2 < extBytes2.length; ie2++)
+      for (var b2 = 7; b2 >= 0; b2--) bits.push((extBytes2[ie2] & (1 << b2)) === 0);
+  }
+  return { bits: bits };
+}
+
+function parseFullMapBin(buffer) {
+  var stream = new BinaryStream(buffer);
+  var packet = unwrapPacket(stream);
+  var optMask = readOptionBitsRaw(packet).bits.slice().reverse();
+  var popBit = function() { return optMask.pop(); };
+  var result = { collisionData1: null, collisionData2: null, props: [] };
+  if (popBit()) {
+    var atlasLen = packet.readStringLength();
+    for (var ia = 0; ia < atlasLen; ia++) {
+      packet.readInt32(false); packet.readString(); packet.readUint32(false);
+      var rectLen = packet.readStringLength();
+      for (var ir = 0; ir < rectLen; ir++) { packet.readUint32(false); packet.readString(); packet.readString(); packet.readUint32(false); packet.readUint32(false); packet.readUint32(false); }
+      packet.readUint32(false);
+    }
+  }
+  if (popBit()) {
+    var uLen = packet.readStringLength();
+    for (var iu = 0; iu < uLen; iu++) { packet.readUint32(false); packet.readString(); packet.readBytes(12); packet.readString(); }
+  }
+  function readCols() {
+    var col = { shapesType1: [], shapesType2: [], shapesType3: [] };
+    var l1 = packet.readStringLength();
+    for (var i = 0; i < l1; i++) col.shapesType1.push([packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false),packet.readFloat32(false)]);
+    var l2 = packet.readStringLength();
+    for (var i2 = 0; i2 < l2; i2++) { var f1 = packet.readFloat64(false); var d = []; for (var j = 0; j < 6; j++) d.push(packet.readFloat32(false)); var f2 = packet.readFloat64(false); col.shapesType2.push({ f1: f1, data: d, f2: f2 }); }
+    var l3 = packet.readStringLength();
+    for (var i3 = 0; i3 < l3; i3++) { var f1b = packet.readFloat64(false); var d2 = []; for (var j2 = 0; j2 < 15; j2++) d2.push(packet.readFloat32(false)); col.shapesType3.push({ f1: f1b, data: d2 }); }
+    return col;
+  }
+  result.collisionData1 = readCols(); result.collisionData2 = readCols();
+  var matLen = packet.readStringLength();
+  for (var im = 0; im < matLen; im++) {
+    packet.readUint32(false); packet.readString();
+    if (popBit()) { var ol1 = packet.readStringLength(); for (var x1 = 0; x1 < ol1; x1++) { packet.readString(); packet.readUint32(false); } }
+    packet.readString();
+    var texLen = packet.readStringLength();
+    for (var jt = 0; jt < texLen; jt++) { if (popBit()) packet.readString(); packet.readString(); packet.readString(); }
+    if (popBit()) { var ol2 = packet.readStringLength(); for (var x2 = 0; x2 < ol2; x2++) { packet.readString(); packet.readFloat64(false); } }
+    if (popBit()) { var ol3 = packet.readStringLength(); for (var x3 = 0; x3 < ol3; x3++) { packet.readString(); packet.readFloat32(false); packet.readFloat32(false); packet.readFloat32(false); } }
+    if (popBit()) { var ol4 = packet.readStringLength(); for (var x4 = 0; x4 < ol4; x4++) { packet.readString(); packet.readFloat32(false); packet.readFloat32(false); packet.readFloat32(false); packet.readFloat32(false); } }
+  }
+  if (popBit()) { var u28Len = packet.readStringLength(); for (var iu28 = 0; iu28 < u28Len; iu28++) packet.readBytes(28); }
+  var propLen = packet.readStringLength();
+  for (var ip = 0; ip < propLen; ip++) {
+    if (popBit()) packet.readString();
+    packet.readUint32(false); packet.readString(); packet.readUint32(false); packet.readString();
+    var pos = [packet.readFloat32(false), packet.readFloat32(false), packet.readFloat32(false)];
+    var rot = popBit() ? [packet.readFloat32(false), packet.readFloat32(false), packet.readFloat32(false)] : [0, 0, 0];
+    var scale = popBit() ? [packet.readFloat32(false), packet.readFloat32(false), packet.readFloat32(false)] : [1, 1, 1];
+    result.props.push({ pos: pos, rot: rot, scale: scale });
+  }
+  return result;
+}
+
+// ═══ Geometry precompute (same as v2.3) ═══
+var COLORS = {
+  coll1: { type1: 0x3399FF, type2: 0xFFCC33, type3: 0xCC66FF },
+  coll2: { type1: 0x2266AA, type2: 0xCC9922, type3: 0x8844CC }
+};
+function hexToRgb(hex) { return { r: (hex >> 16) & 255, g: (hex >> 8) & 255, b: hex & 255 }; }
+
+var BOX_CORNERS = [
+  -1,-1,-1,  1,-1,-1,  1,1,-1,  -1,1,-1,
+  -1,-1,1,   1,-1,1,   1,1,1,   -1,1,1
+];
+var reuseEuler = new THREE.Euler(), reuseMat = new THREE.Matrix4(), reuseVec = new THREE.Vector3();
+
+function computeBoxVerts(pos, rot, half) {
+  var out = new Float32Array(24);
+  reuseEuler.set(rot[0], rot[1], rot[2], 'ZYX');
+  reuseMat.makeRotationFromEuler(reuseEuler);
+  for (var i = 0; i < 8; i++) {
+    var ix = i * 3;
+    reuseVec.set(BOX_CORNERS[ix] * half[0], BOX_CORNERS[ix + 1] * half[1], BOX_CORNERS[ix + 2] * half[2]);
+    reuseVec.applyMatrix4(reuseMat);
+    out[ix] = reuseVec.x + pos[0];
+    out[ix + 1] = reuseVec.y + pos[1];
+    out[ix + 2] = reuseVec.z + pos[2];
+  }
+  return out;
+}
+function computeTriVerts(pos, rot, verts9) {
+  var out = new Float32Array(9);
+  reuseEuler.set(rot[0], rot[1], rot[2], 'ZYX');
+  reuseMat.makeRotationFromEuler(reuseEuler);
+  for (var i = 0; i < 3; i++) {
+    var ix = i * 3;
+    reuseVec.set(verts9[ix], verts9[ix + 1], verts9[ix + 2]);
+    reuseVec.applyMatrix4(reuseMat);
+    out[ix] = reuseVec.x + pos[0];
+    out[ix + 1] = reuseVec.y + pos[1];
+    out[ix + 2] = reuseVec.z + pos[2];
+  }
+  return out;
+}
+
+var renderGroups = [], totalShapes = 0, bounds = null;
+
+function buildRenderShapes(collisionData1, collisionData2) {
+  renderGroups = []; totalShapes = 0;
+  var pair = [['coll1', collisionData1], ['coll2', collisionData2]];
+  var typeCounts = { t1: 0, t2: 0, t3: 0 };
+  for (var p = 0; p < pair.length; p++) {
+    var colKey = pair[p][0], colData = pair[p][1];
+    if (!colData) continue;
+    var colorSet = COLORS[colKey];
+    var t1 = [];
+    if (colData.shapesType1) {
+      for (var i = 0; i < colData.shapesType1.length; i++) {
+        var d = colData.shapesType1[i];
+        t1.push(computeBoxVerts([d[0], d[1], d[2]], [d[3], d[4], d[5]], [d[6] / 2, d[7] / 2, d[8] / 2]));
+        typeCounts.t1++;
+      }
+    }
+    var t2 = [];
+    if (colData.shapesType2) {
+      for (var j = 0; j < colData.shapesType2.length; j++) {
+        var d2 = colData.shapesType2[j];
+        t2.push(computeBoxVerts([d2.data[0], d2.data[1], d2.data[2]], [d2.data[3], d2.data[4], d2.data[5]], [d2.f2 / 2, d2.f1 / 2, 2.5]));
+        typeCounts.t2++;
+      }
+    }
+    var t3 = [];
+    if (colData.shapesType3) {
+      for (var k = 0; k < colData.shapesType3.length; k++) {
+        var d3 = colData.shapesType3[k];
+        t3.push(computeTriVerts([d3.data[0], d3.data[1], d3.data[2]], [d3.data[3], d3.data[4], d3.data[5]], [d3.data[6], d3.data[7], d3.data[8], d3.data[9], d3.data[10], d3.data[11], d3.data[12], d3.data[13], d3.data[14]]));
+        typeCounts.t3++;
+      }
+    }
+    if (t1.length) { renderGroups.push(makeGroup(colorSet.type1, t1)); totalShapes += t1.length; }
+    if (t2.length) { renderGroups.push(makeGroup(colorSet.type2, t2)); totalShapes += t2.length; }
+    if (t3.length) { renderGroups.push(makeGroup(colorSet.type3, t3)); totalShapes += t3.length; }
+  }
+  computeBounds();
+  return { t1: typeCounts.t1, t2: typeCounts.t2, t3: typeCounts.t3 };
+}
+
+function makeGroup(hex, shapes) {
+  var rgb = hexToRgb(hex);
+  var spheres = new Float32Array(shapes.length * 4);
+  for (var s = 0; s < shapes.length; s++) {
+    var sp = computeSphere(shapes[s]);
+    spheres[s * 4] = sp.x; spheres[s * 4 + 1] = sp.y; spheres[s * 4 + 2] = sp.z; spheres[s * 4 + 3] = sp.r;
+  }
+  return {
+    fill: 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.35)',
+    stroke: 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',0.9)',
+    shapes: shapes,
+    spheres: spheres
+  };
+}
+
+// Generic bounding sphere: center = vertex average, radius = max distance from center
+function computeSphere(verts) {
+  var n = verts.length / 3;
+  var cx = 0, cy = 0, cz = 0;
+  for (var i = 0; i < n; i++) { cx += verts[i * 3]; cy += verts[i * 3 + 1]; cz += verts[i * 3 + 2]; }
+  cx /= n; cy /= n; cz /= n;
+  var r2 = 0;
+  for (var j = 0; j < n; j++) {
+    var dx = verts[j * 3] - cx, dy = verts[j * 3 + 1] - cy, dz = verts[j * 3 + 2] - cz;
+    var d2 = dx * dx + dy * dy + dz * dz;
+    if (d2 > r2) r2 = d2;
+  }
+  return { x: cx, y: cy, z: cz, r: Math.sqrt(r2) };
+}
+
+function computeBounds() {
+  var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (var g = 0; g < renderGroups.length; g++) {
+    var shapes = renderGroups[g].shapes;
+    for (var s = 0; s < shapes.length; s++) {
+      var v = shapes[s];
+      for (var i = 0; i < v.length; i += 3) {
+        if (v[i] < minX) minX = v[i]; if (v[i] > maxX) maxX = v[i];
+        if (v[i + 1] < minY) minY = v[i + 1]; if (v[i + 1] > maxY) maxY = v[i + 1];
+        if (v[i + 2] < minZ) minZ = v[i + 2]; if (v[i + 2] > maxZ) maxZ = v[i + 2];
+      }
+    }
+  }
+  bounds = {
+    minX: minX, maxX: maxX, minY: minY, maxY: maxY, minZ: minZ, maxZ: maxZ,
+    cx: (minX + maxX) / 2, cy: (minY + maxY) / 2, cz: (minZ + maxZ) / 2,
+    size: Math.max(maxX - minX, maxY - minY, maxZ - minZ, 1)
+  };
+}
+
+// ═══ Projection (same as v2.3) ═══
+var viewMatrix = new THREE.Matrix4(), projMatrix = new THREE.Matrix4(), vpMatrix = new THREE.Matrix4();
+
+function lookAtMatrix(eye, target, up, out) {
+  var zx = eye[0] - target[0], zy = eye[1] - target[1], zz = eye[2] - target[2];
+  var zl = Math.sqrt(zx * zx + zy * zy + zz * zz) || 1; zx /= zl; zy /= zl; zz /= zl;
+  var ux = up[0], uy = up[1], uz = up[2];
+  var xx = uy * zz - uz * zy, xy = uz * zx - ux * zz, xz = ux * zy - uy * zx;
+  var xl = Math.sqrt(xx * xx + xy * xy + xz * xz) || 1; xx /= xl; xy /= xl; xz /= xl;
+  var yx = zy * xz - zz * xy, yy = zz * xx - zx * xz, yz = zx * xy - zy * xx;
+  var yl = Math.sqrt(yx * yx + yy * yy + yz * yz) || 1; yx /= yl; yy /= yl; yz /= yl;
+  out.set(
+    xx, xy, xz, -(xx * eye[0] + xy * eye[1] + xz * eye[2]),
+    yx, yy, yz, -(yx * eye[0] + yy * eye[1] + yz * eye[2]),
+    zx, zy, zz, -(zx * eye[0] + zy * eye[1] + zz * eye[2]),
+    0, 0, 0, 1
+  );
+}
+
+function projectVertex(x, y, z, m, out) {
+  var e = m.elements;
+  var w = e[3] * x + e[7] * y + e[11] * z + e[15];
+  if (w <= 0.0001) return false;
+  var iw = 1 / w;
+  out[0] = (e[0] * x + e[4] * y + e[8] * z + e[12]) * iw;
+  out[1] = (e[1] * x + e[5] * y + e[9] * z + e[13]) * iw;
+  return true;
+}
+
+// ═══ Orbit camera ═══
+var cam = { yaw: 0.8, pitch: 0.45, dist: 1.4 };
+var dragging = false, lastX = 0, lastY = 0;
+var showWireOnly = false;
+var STROKE_MIN_PX = 3;
+var drawnShapes = 0;
+var ndcBuf = [0, 0], scratchBuf = new Float32Array(16);
+
+function render() {
+  var w = window.innerWidth, h = window.innerHeight;
+  canvas.width = w; canvas.height = h;
+  var ctx = canvas.getContext('2d');
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.fillStyle = '#0a0a12';
+  ctx.fillRect(0, 0, w, h);
+  drawnShapes = 0;
+
+  if (!bounds) return;
+  var cy = cam.pitch, cx = cam.yaw, dist = cam.dist * bounds.size;
+  var sp = Math.sin(cy), cp = Math.cos(cy);
+  var ex = bounds.cx + dist * cp * Math.sin(cx);
+  var ey = bounds.cy + dist * sp;
+  var ez = bounds.cz + dist * cp * Math.cos(cx);
+  lookAtMatrix([ex, ey, ez], [bounds.cx, bounds.cy, bounds.cz], [0, 1, 0], viewMatrix);
+  var near = Math.max(bounds.size * 0.001, 1), far = bounds.size * 10;
+  var fov = 50 * Math.PI / 180;
+  var aspect = w / Math.max(h, 1);
+  var top = near * Math.tan(fov / 2), bottom = -top;
+  projMatrix.makePerspective(-top * aspect, top * aspect, top, bottom, near, far);
+  vpMatrix.multiplyMatrices(projMatrix, viewMatrix);
+
+  for (var g = 0; g < renderGroups.length; g++) {
+    var group = renderGroups[g];
+    var shapes = group.shapes;
+    var spheres = group.spheres;
+    var fillPath = new Path2D();
+    var strokePath = new Path2D();
+    var anyFill = false, anyStroke = false;
+    for (var s = 0; s < shapes.length; s++) {
+      var cx = spheres[s * 4], cy = spheres[s * 4 + 1], cz = spheres[s * 4 + 2], cr = spheres[s * 4 + 3];
+
+      // Quick cull: project sphere center
+      if (!projectVertex(cx, cy, cz, vpMatrix, ndcBuf)) continue;
+      var cSX = (ndcBuf[0] + 1) / 2 * w;
+      var cSY = (1 - ndcBuf[1]) / 2 * h;
+
+      // Estimate screen radius (project center + radius along X)
+      if (projectVertex(cx + cr, cy, cz, vpMatrix, ndcBuf)) {
+        var rSX = (ndcBuf[0] + 1) / 2 * w;
+        var rSY = (1 - ndcBuf[1]) / 2 * h;
+        var screenR = Math.sqrt((rSX - cSX) * (rSX - cSX) + (rSY - cSY) * (rSY - cSY));
+      } else {
+        var screenR = cr * 0.05;
+      }
+      if (screenR < 0.8) continue; // sub-pixel: invisible
+      if (cSX < -screenR * 2 || cSX > w + screenR * 2 || cSY < -screenR * 2 || cSY > h + screenR * 2) continue;
+
+      // Project all vertices
+      var verts = shapes[s];
+      var n = verts.length / 3;
+      var allFront = true;
+      for (var i = 0; i < n; i++) {
+        if (!projectVertex(verts[i * 3], verts[i * 3 + 1], verts[i * 3 + 2], vpMatrix, ndcBuf)) { allFront = false; break; }
+        scratchBuf[i * 2] = (ndcBuf[0] + 1) / 2 * w;
+        scratchBuf[i * 2 + 1] = (1 - ndcBuf[1]) / 2 * h;
+      }
+      if (!allFront) continue;
+
+      fillPath.moveTo(scratchBuf[0], scratchBuf[1]);
+      for (var j = 1; j < n; j++) fillPath.lineTo(scratchBuf[j * 2], scratchBuf[j * 2 + 1]);
+      fillPath.closePath();
+      anyFill = true;
+      drawnShapes++;
+
+      if (screenR >= STROKE_MIN_PX) {
+        strokePath.moveTo(scratchBuf[0], scratchBuf[1]);
+        for (var j2 = 1; j2 < n; j2++) strokePath.lineTo(scratchBuf[j2 * 2], scratchBuf[j2 * 2 + 1]);
+        strokePath.closePath();
+        anyStroke = true;
+      }
+    }
+    if (anyFill && !showWireOnly) {
+      ctx.fillStyle = group.fill;
+      ctx.fill(fillPath);
+    }
+    if (anyStroke) {
+      ctx.strokeStyle = group.stroke;
+      ctx.lineWidth = 1;
+      ctx.stroke(strokePath);
+    }
+  }
+  hud.querySelector('#drawn').textContent = drawnShapes;
+  requestAnimationFrame(render);
+}
+
+canvas.addEventListener('pointerdown', function(e) {
+  dragging = true; lastX = e.clientX; lastY = e.clientY;
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener('pointermove', function(e) {
+  if (!dragging) return;
+  var dx = e.clientX - lastX, dy = e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  cam.yaw -= dx * 0.005;
+  cam.pitch += dy * 0.005;
+  if (cam.pitch > 1.5) cam.pitch = 1.5;
+  if (cam.pitch < -1.5) cam.pitch = -1.5;
+});
+canvas.addEventListener('pointerup', function() { dragging = false; });
+canvas.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  cam.dist *= (1 + e.deltaY * 0.001);
+  if (cam.dist < 0.05) cam.dist = 0.05;
+  if (cam.dist > 100) cam.dist = 100;
+}, { passive: false });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'f' || e.key === 'F') showWireOnly = !showWireOnly;
+});
+
+// ═══ Load + init ═══
+fetch('map.bin')
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.arrayBuffer();
+  })
+  .then(function(buf) {
+    var parsed = parseFullMapBin(new Uint8Array(buf));
+    var counts = buildRenderShapes(parsed.collisionData1, parsed.collisionData2);
+    document.getElementById('load').style.display = 'none';
+    hud.style.display = 'block';
+    hud.innerHTML =
+      '<div style="font-weight:bold;color:#76ff33;">map.bin loaded (' + (buf.byteLength / 1024).toFixed(0) + ' KB)</div>' +
+      '<div>type1=' + counts.t1 + ' type2=' + counts.t2 + ' type3=' + counts.t3 + ' props=' + parsed.props.length + '</div>' +
+      '<div>color groups=' + renderGroups.length + ' total shapes=' + totalShapes + ' <span id="drawn">drawn=</span></div>' +
+      '<div>bounds: x=[' + bounds.minX.toFixed(0) + ',' + bounds.maxX.toFixed(0) + '] y=[' + bounds.minY.toFixed(0) + ',' + bounds.maxY.toFixed(0) + '] z=[' + bounds.minZ.toFixed(0) + ',' + bounds.maxZ.toFixed(0) + ']</div>' +
+      '<div style="color:#888;">drag=rotate wheel=zoom F=wireframe-only</div>';
+    requestAnimationFrame(render);
+  })
+  .catch(function(err) {
+    document.getElementById('load').innerHTML = 'Error: ' + err.message + '<br>Start server: node test-server.js';
+  });
+</script>
+</body>
+</html>
