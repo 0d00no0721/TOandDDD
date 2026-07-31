@@ -1,0 +1,58 @@
+{
+  "libraries": [
+    {
+      "id": "main",
+      "name": "Remaster",
+      "libraryJsonUrl": "https://res.3dtank.com/553/105167/27/302/30546776460526/library.json",
+      "baseUrl": "https://res.3dtank.com/553/105167/27/302/30546776460526",
+      "propCount": 1020,
+      "description": "主道具库，含建筑/自然/装饰/地形/载具等全类别道具"
+    },
+    {
+      "id": "newyear",
+      "name": "LibNewYear2024_Remaster",
+      "libraryJsonUrl": "https://res.3dtank.com/570/174542/371/71/31167243462337/library.json",
+      "baseUrl": "https://res.3dtank.com/570/174542/371/71/31167243462337",
+      "propCount": 126,
+      "description": "新年活动道具库，含节日装饰/雪地道具"
+    }
+  ],
+  "referenceMaps": [
+    {
+      "name": "Sandbox Summer Day",
+      "url": "https://res.3dtank.com/570/174542/371/60/31656237623505/map.bin",
+      "library": "main"
+    },
+    {
+      "name": "Forest Summer Day",
+      "url": "https://res.3dtank.com/0/16723/204/372/31656237623200/map.bin",
+      "library": "main"
+    },
+    {
+      "name": "Sandal Summer Day",
+      "url": "https://res.3dtank.com/544/77313/263/311/31656237623450/map.bin",
+      "library": "main"
+    },
+    {
+      "name": "Highland Summer Day",
+      "url": "https://res.3dtank.com/570/174542/371/116/31656237623240/map.bin",
+      "library": null
+    },
+    {
+      "name": "Cross Summer Day",
+      "url": "https://res.3dtank.com/570/174542/371/130/31656237623152/map.bin",
+      "library": null
+    },
+    {
+      "name": "Parma Summer Day",
+      "url": "https://res.3dtank.com/570/174542/371/104/31656237623400/map.bin",
+      "library": null
+    }
+  ],
+  "assetUrlPattern": {
+    "description": "道具资源（mesh/贴图）的 URL 规则",
+    "meshFile": "<baseUrl>/<mesh.file>",
+    "diffuseMap": "<baseUrl>/<diffuseMap>",
+    "note": "baseUrl 来自库 URL 去掉末尾 library.json。mesh.file 和 diffuseMap 在 library.json 每个 prop 中指定。"
+  }
+}

@@ -1,0 +1,4612 @@
+{
+  "generatedAt": "2026-07-26T06:41:33.879Z",
+  "totalProps": 1146,
+  "libraries": [
+    {
+      "id": "main",
+      "name": "Remaster"
+    },
+    {
+      "id": "newyear",
+      "name": "LibNewYear2024_Remaster"
+    }
+  ],
+  "categories": {
+    "decoration": [
+      {
+        "name": "Balloon_01_Black",
+        "libId": "main"
+      },
+      {
+        "name": "Balloon_01_Orange",
+        "libId": "main"
+      },
+      {
+        "name": "Balloon_01_White",
+        "libId": "main"
+      },
+      {
+        "name": "billboard",
+        "libId": "main"
+      },
+      {
+        "name": "billboard_1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "billboard_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_1",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_2",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_E",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_L",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_M",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Flags_01_L",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Flags_01_M",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Flags_01_S",
+        "libId": "main"
+      },
+      {
+        "name": "Light_Floodlight_01",
+        "libId": "main"
+      },
+      {
+        "name": "Light_Floodlight_01_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Light_Lamp_01",
+        "libId": "main"
+      },
+      {
+        "name": "Light_Pole_01",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_02b",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_03a",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_03b",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_04a",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_05a",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_05b",
+        "libId": "main"
+      },
+      {
+        "name": "Scarecrow_06b",
+        "libId": "main"
+      },
+      {
+        "name": "Spiderweb_Vilhou_1a",
+        "libId": "main"
+      },
+      {
+        "name": "Spiderweb_Vilhou_2a",
+        "libId": "main"
+      },
+      {
+        "name": "Spiderweb_Vilhou_3a",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sn_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1 b_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sn_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_1_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sn_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2 b_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sn_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_2_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3 b_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_3_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub10",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub11",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sn_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub10",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub11",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Vilhou_4_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "billboard_1_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Flags_1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Flags_2",
+        "libId": "newyear"
+      },
+      {
+        "name": "Light_Lamp_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Light_Pole_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Spotlight_S_01_Base",
+        "libId": "newyear"
+      },
+      {
+        "name": "Spotlight_S_01_Light",
+        "libId": "newyear"
+      },
+      {
+        "name": "Vilhou_2_New_Low",
+        "libId": "newyear"
+      },
+      {
+        "name": "Vilhou_3_New_Low",
+        "libId": "newyear"
+      },
+      {
+        "name": "Vilhou_4_New_Low",
+        "libId": "newyear"
+      }
+    ],
+    "structure": [
+      {
+        "name": "Barrel_01",
+        "libId": "main"
+      },
+      {
+        "name": "Barrel_01_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Barrel_02",
+        "libId": "main"
+      },
+      {
+        "name": "Barrel_02_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Barrel_03",
+        "libId": "main"
+      },
+      {
+        "name": "Barrel_03_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Barrel_05",
+        "libId": "main"
+      },
+      {
+        "name": "Barrels_Cluster_01",
+        "libId": "main"
+      },
+      {
+        "name": "Barrels_Cluster_01_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Barrels_Cluster_02",
+        "libId": "main"
+      },
+      {
+        "name": "Barrels_Cluster_02_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Barrels_Cluster_03",
+        "libId": "main"
+      },
+      {
+        "name": "Barrels_Cluster_03_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Rise_1_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Rise_1_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Rise_1_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Rise_2_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Rise_2_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Rise_2_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Straight_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Straight_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Broken_Straight_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "conc_fence",
+        "libId": "main"
+      },
+      {
+        "name": "conc_fence_2",
+        "libId": "main"
+      },
+      {
+        "name": "conc_fence_2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "conc_fence_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_pile",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_pile_b",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_pile_b_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_pile_edge",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_pile_sn",
+        "libId": "main"
+      },
+      {
+        "name": "conc_plug",
+        "libId": "main"
+      },
+      {
+        "name": "conc_plug_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_01",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_01_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_02",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_02_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_03",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_03_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_04",
+        "libId": "main"
+      },
+      {
+        "name": "Conc_slab_04_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01c_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01c_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_01c_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_02a",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_02b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_02b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Concrete_Floor_02b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD0_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_LOD2_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow_sn_LOD0_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "fab_tow2_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_01c",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_02a",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_02a_Post",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_02b",
+        "libId": "main"
+      },
+      {
+        "name": "Fence_02b_Post",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Generator_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Fence_Bat_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Fence_Bat_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Fence_Ghost_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Fence_Ghost_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Fence_Text_01",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Fence_Text_02",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Wall_Bat_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Wall_Bat_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Wall_Ghost_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Wall_Ghost_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Wall_Text_01",
+        "libId": "main"
+      },
+      {
+        "name": "Graffiti_Wall_Text_02",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Fronton_M_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Fronton_M_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Fronton_M_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Fronton_S_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Fronton_S_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Fronton_S_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "industrial_pipe_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "industrial_pipe_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "industrial_pipe_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "industrial_pipe_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "industrial_pipe_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Roof_M_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Roof_M_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Roof_M_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Roof_S_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Roof_S_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Roof_S_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Trim_Edge",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_half_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_half_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_Door_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_Door_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_Door_01_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_Door_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_Door_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Bottom_Door_02_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Flat",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Pillar_Bottom_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Pillar_Bottom_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Pillar_Top",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01a_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01a_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01a_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01d_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01d_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01d_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01e_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01e_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_01e_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02a_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02a_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02a_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02d_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02d_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02d_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02с_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02с_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Industrial_Wall_Window_02с_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Light_Powerbox_01",
+        "libId": "main"
+      },
+      {
+        "name": "Metal_Beam_M",
+        "libId": "main"
+      },
+      {
+        "name": "Metal_Beam_S",
+        "libId": "main"
+      },
+      {
+        "name": "Metal_Plate",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_01",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_02",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_03",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_04",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_Corner_L",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_Corner_S",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_Joint",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_Support",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_Support_Block",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_T",
+        "libId": "main"
+      },
+      {
+        "name": "Pipe_Valve",
+        "libId": "main"
+      },
+      {
+        "name": "rusty_tank",
+        "libId": "main"
+      },
+      {
+        "name": "rusty_tank_sn",
+        "libId": "main"
+      },
+      {
+        "name": "s_conc_fence_2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "s_conc_fence_sn",
+        "libId": "main"
+      },
+      {
+        "name": "s_conc_plug_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_01_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_02_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_Blade",
+        "libId": "main"
+      },
+      {
+        "name": "Saw_Blade_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Brick_01a_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Brick_01a_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Brick_02a",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Brick_02b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Brick_02b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Broken",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Broken_S",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Edge_E",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Edge_L",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Edge_M",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Edge_S",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Frame_E",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Frame_L",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Frame_M",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Frame_S",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_3w_industrial",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_cr_industrial",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_cr_industrial_3_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_cr_industrial_3_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_cr_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_cr_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e1_industrial",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e1_industrial_3_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e1_industrial_3_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_e1_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_e1_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e2_industrial",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e2_industrial_3_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e2_industrial_3_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_e2_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_e2_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e3_industrial",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e3_industrial_3_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_e3_industrial_3_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_e3_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_e3_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_st_industrial",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_st_industrial_3_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_new_st_industrial_3_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_st_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "wall_new_st_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_03_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_03_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_04_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Wall_Pieces_04_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Wooden_Pile_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Wooden_Pile_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Wooden_Pile_02a",
+        "libId": "main"
+      },
+      {
+        "name": "Wooden_Pile_02b",
+        "libId": "main"
+      },
+      {
+        "name": "Wooden_Pile_03a",
+        "libId": "main"
+      },
+      {
+        "name": "Wooden_Post",
+        "libId": "main"
+      },
+      {
+        "name": "Сooling_Tower",
+        "libId": "main"
+      },
+      {
+        "name": "Сooling_Tower_Ruins_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сooling_Tower_Ruins_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Bridge_Wood_Span_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bridge_Wood_Support_High_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bridge_Wood_Support_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "conc_fence_2_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "conc_fence_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "conc_plug_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Conc_slab_01_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Conc_slab_02_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Conc_slab_03_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Conc_slab_04_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub2",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub3",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub4",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub5",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub6",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow1_New_LOD2_sn_sub7",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub2",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub3",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub4",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub5",
+        "libId": "newyear"
+      },
+      {
+        "name": "Fabtow2_New_LOD2_sn_sub6",
+        "libId": "newyear"
+      },
+      {
+        "name": "Light_Powerbox_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Vilhou_2_New_Wood_Low",
+        "libId": "newyear"
+      }
+    ],
+    "other": [
+      {
+        "name": "Bat_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Bat_01b",
+        "libId": "main"
+      },
+      {
+        "name": "bd_in_ring",
+        "libId": "main"
+      },
+      {
+        "name": "bd_in_ring_sn",
+        "libId": "main"
+      },
+      {
+        "name": "bd_out_ring",
+        "libId": "main"
+      },
+      {
+        "name": "bd_out_ring_sn",
+        "libId": "main"
+      },
+      {
+        "name": "border_new",
+        "libId": "main"
+      },
+      {
+        "name": "border_new_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Brick_pile",
+        "libId": "main"
+      },
+      {
+        "name": "brick_pile_b",
+        "libId": "main"
+      },
+      {
+        "name": "brick_pile_b_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Brick_pile_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Candle",
+        "libId": "main"
+      },
+      {
+        "name": "Cauldron",
+        "libId": "main"
+      },
+      {
+        "name": "chest_1",
+        "libId": "main"
+      },
+      {
+        "name": "chest_1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_2",
+        "libId": "main"
+      },
+      {
+        "name": "chest_2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_3",
+        "libId": "main"
+      },
+      {
+        "name": "chest_3_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_4",
+        "libId": "main"
+      },
+      {
+        "name": "chest_4_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_gift_1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_gift_2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_gift_3_sn",
+        "libId": "main"
+      },
+      {
+        "name": "chest_gift_4_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cinderblock_01",
+        "libId": "main"
+      },
+      {
+        "name": "Cinderblock_02",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Claw_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Coffin_01",
+        "libId": "main"
+      },
+      {
+        "name": "Coffin_01_lid",
+        "libId": "main"
+      },
+      {
+        "name": "Coffin_02",
+        "libId": "main"
+      },
+      {
+        "name": "Coffin_02_lid",
+        "libId": "main"
+      },
+      {
+        "name": "Coffin_03",
+        "libId": "main"
+      },
+      {
+        "name": "Coffin_03_lid",
+        "libId": "main"
+      },
+      {
+        "name": "Confetti_1",
+        "libId": "main"
+      },
+      {
+        "name": "Confetti_2",
+        "libId": "main"
+      },
+      {
+        "name": "cont_blue",
+        "libId": "main"
+      },
+      {
+        "name": "cont_blue_sn",
+        "libId": "main"
+      },
+      {
+        "name": "cont_green",
+        "libId": "main"
+      },
+      {
+        "name": "cont_green_sn",
+        "libId": "main"
+      },
+      {
+        "name": "cont_red",
+        "libId": "main"
+      },
+      {
+        "name": "cont_red_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Crow_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Crow_01b",
+        "libId": "main"
+      },
+      {
+        "name": "display",
+        "libId": "main"
+      },
+      {
+        "name": "Floor_Grate",
+        "libId": "main"
+      },
+      {
+        "name": "ForestMMRemaster-Terrain-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "ForestWinterMMRemaster-Terrain-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "Garage_Legacy",
+        "libId": "main"
+      },
+      {
+        "name": "Ghost_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Ghost_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Ghost_01c",
+        "libId": "main"
+      },
+      {
+        "name": "goth_skull",
+        "libId": "main"
+      },
+      {
+        "name": "GraveBase_01",
+        "libId": "main"
+      },
+      {
+        "name": "GraveBase_02",
+        "libId": "main"
+      },
+      {
+        "name": "GraveBase_03",
+        "libId": "main"
+      },
+      {
+        "name": "GraveTop_01",
+        "libId": "main"
+      },
+      {
+        "name": "GraveTop_02",
+        "libId": "main"
+      },
+      {
+        "name": "GraveTop_03",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Bucket_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Bucket_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Bucket_01c",
+        "libId": "main"
+      },
+      {
+        "name": "heazel_low",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Lb_track_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Leaves_Pile_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Leaves_Pile_02_au",
+        "libId": "main"
+      },
+      {
+        "name": "Leaves_Pile_03_au",
+        "libId": "main"
+      },
+      {
+        "name": "Leaves_Pile_Corner_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Leaves_Pile_Corner_02_au",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Lf_track_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_01",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_01_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_02",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_02_au",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_02_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_03",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_03_au",
+        "libId": "main"
+      },
+      {
+        "name": "Mount_03_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Owl_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Photo7",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_01_Orange",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_02_Green",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_02_Yellow",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_03_Green",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_03_Orange",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_03_Yellow",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_05_Orange",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_06_Orange",
+        "libId": "main"
+      },
+      {
+        "name": "Pumpkin_08_Orange",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Rb_track_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Rf_track_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "rise_5_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "rise_5_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "rise_5_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "rise_5_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_a_part1",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_a_part2",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_a_part2c",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_a_part2d",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_a_sn_part1",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_a_sn_part2",
+        "libId": "main"
+      },
+      {
+        "name": "Rise_Grate",
+        "libId": "main"
+      },
+      {
+        "name": "Rope_01_L",
+        "libId": "main"
+      },
+      {
+        "name": "Rope_01_M",
+        "libId": "main"
+      },
+      {
+        "name": "Rope_01_S",
+        "libId": "main"
+      },
+      {
+        "name": "Rope_S_Text",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_04_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_04_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_07_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_07_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_08_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Soil_08_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Spiderweb_Corner",
+        "libId": "main"
+      },
+      {
+        "name": "Spiderweb_Flat",
+        "libId": "main"
+      },
+      {
+        "name": "wire",
+        "libId": "main"
+      },
+      {
+        "name": "border_new_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Confetti_1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Confetti_2",
+        "libId": "newyear"
+      },
+      {
+        "name": "display",
+        "libId": "newyear"
+      },
+      {
+        "name": "Mount_02_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Mount_03_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Shelter",
+        "libId": "newyear"
+      }
+    ],
+    "natural": [
+      {
+        "name": "Big_tree_branches",
+        "libId": "main"
+      },
+      {
+        "name": "Big_tree_branches_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Big_tree_dead",
+        "libId": "main"
+      },
+      {
+        "name": "Big_tree_dead_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Big_tree_trunk",
+        "libId": "main"
+      },
+      {
+        "name": "Big_tree_trunk_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Bush_Flat_Cluster_M",
+        "libId": "main"
+      },
+      {
+        "name": "Bush_Flat_Cluster_S",
+        "libId": "main"
+      },
+      {
+        "name": "bush1_au_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "bush1_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "bush1_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "bush2_au_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "bush2_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "bush2_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Christmas_Tree",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_01",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_01_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_02_renamed_from_04",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_a",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_a_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_b",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_b_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_c",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_c_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_d",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_d_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_e",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_bg_e_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Corner",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Corner_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Corner_Inner",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Corner_Inner_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Corner_Inner_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Corner_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Rise_Inner",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Rise_Inner_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_01",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_02_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_03",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_03_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_04",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_04_au",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_05",
+        "libId": "main"
+      },
+      {
+        "name": "Cliff_Wall_05_au",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_Big_tree_L",
+        "libId": "main"
+      },
+      {
+        "name": "Flags_Big_tree_M",
+        "libId": "main"
+      },
+      {
+        "name": "Flower_A",
+        "libId": "main"
+      },
+      {
+        "name": "Flower_A_au",
+        "libId": "main"
+      },
+      {
+        "name": "Flower_B",
+        "libId": "main"
+      },
+      {
+        "name": "Flower_B_au",
+        "libId": "main"
+      },
+      {
+        "name": "Flower_C",
+        "libId": "main"
+      },
+      {
+        "name": "Flower_C_au",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Crowler",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Crowler_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_L",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_L_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_M",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_M_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_S_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_1",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_1_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_2",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_2_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_3",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_3_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_4",
+        "libId": "main"
+      },
+      {
+        "name": "Garland_Vilhou_4_Low",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_flw_L",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_flw_L_au",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_flw_M",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_flw_M_au",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_L",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_L_au",
+        "libId": "main"
+      },
+      {
+        "name": "grass_L2",
+        "libId": "main"
+      },
+      {
+        "name": "grass_L2_au",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_M",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_M_au",
+        "libId": "main"
+      },
+      {
+        "name": "grass_M2",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_S",
+        "libId": "main"
+      },
+      {
+        "name": "Grass_S_au",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Garland_01a",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Garland_01b",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Garland_01c",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Garland_01d",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Garland_01e",
+        "libId": "main"
+      },
+      {
+        "name": "Halloween_Decor_Garland_02b",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_01",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_02",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_02_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_03_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Corner_Inner",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Corner_Inner_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Ground",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Ground_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Ground_Wall_01",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Ground_Wall_01_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Ground_Wall_02",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Ground_Wall_02_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Industrial_Pipe",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Industrial_Pipe_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Liana_L",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Liana_L_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Liana_M",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Liana_M_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Liana_S",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Liana_S_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Pipe_L",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Pipe_L_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Pipe_M",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Pipe_M_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Pipe_S",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Pipe_S_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Full",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Full_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Top_L",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Top_L_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Top_M",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Top_M_au",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Top_S",
+        "libId": "main"
+      },
+      {
+        "name": "Ivy_Wall_Top_S_au",
+        "libId": "main"
+      },
+      {
+        "name": "Log_01_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Log_01_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Log_01_snowcap",
+        "libId": "main"
+      },
+      {
+        "name": "Log_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Log_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Log_02_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Log_02_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Log_02_snowcap",
+        "libId": "main"
+      },
+      {
+        "name": "Log_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Log_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Root_Large_01",
+        "libId": "main"
+      },
+      {
+        "name": "Root_Large_02",
+        "libId": "main"
+      },
+      {
+        "name": "Root_Medium_01",
+        "libId": "main"
+      },
+      {
+        "name": "Root_Medium_02",
+        "libId": "main"
+      },
+      {
+        "name": "Root_Small_01",
+        "libId": "main"
+      },
+      {
+        "name": "Root_Small_02",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Blue_01",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Blue_02",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Blue_03",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Blue_04",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Blue_05",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Red_01",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Red_02",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Red_03",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Red_04",
+        "libId": "main"
+      },
+      {
+        "name": "Snowman_Red_05",
+        "libId": "main"
+      },
+      {
+        "name": "Stump_01_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Stump_01_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Stump_01_snowcap",
+        "libId": "main"
+      },
+      {
+        "name": "Stump_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Stump_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_bdrop",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_bdrop_autumn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_bdrop_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_bare",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_bare_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_ded_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_Dead_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_Dead_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_Dead_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_Dead_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_L_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_Dead_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_Dead_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_Dead_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_Dead_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_M_ded_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_M_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_Dead_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_Dead_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_Dead_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_Dead_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_S_ded_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_S_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_Sp",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Beech_Sp_au",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_beech_Sp_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_birch_bare_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_Bare_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_Bare_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_dead_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_dead_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_dead_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_dead_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_birch_L_ded_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_L_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_dead_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_dead_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_dead_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_dead_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_M_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_dead_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_dead_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_dead_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_dead_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_birch_S_ded_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_S_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_birch_Sp",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Birch_Sp_au",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_birch_Sp_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Green_Fresh_L",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Green_Fresh_M",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Green_Fresh_S",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Green_Withered_L",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Green_Withered_M",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Green_Withered_S",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Red_L",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Red_M",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Yellow_L",
+        "libId": "main"
+      },
+      {
+        "name": "Tree_Flat_Yellow_M",
+        "libId": "main"
+      },
+      {
+        "name": "tree1_au_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "tree1_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "tree1_sn_LOD0",
+        "libId": "main"
+      },
+      {
+        "name": "Trees_Pine_L_Bdrop",
+        "libId": "main"
+      },
+      {
+        "name": "Bush_Flat_Cluster_L_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bush_Flat_Cluster_M_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bush_Flat_Cluster_S_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bush_Sprout_Cluster_M_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bush_Sprout_Cluster_S_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Bush_Sprout_Cluster_S_02",
+        "libId": "newyear"
+      },
+      {
+        "name": "bush1_sn_LOD0",
+        "libId": "newyear"
+      },
+      {
+        "name": "bush2_sn_LOD0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Christmas_Tree_Large",
+        "libId": "newyear"
+      },
+      {
+        "name": "Christmas_Tree_Large_Clear",
+        "libId": "newyear"
+      },
+      {
+        "name": "Christmas_Tree_Large_L",
+        "libId": "newyear"
+      },
+      {
+        "name": "Christmas_Tree_Large_M",
+        "libId": "newyear"
+      },
+      {
+        "name": "Christmas_Tree_Large_S",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_01_Low_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_03_Low_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_04_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_04_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_05_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_05_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_06_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_06_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_Inner_Low_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Corner_Low_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Rise_Inner_Low_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Rise_Low_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_01_Low_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_02_Low_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_03_Low_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_04_Low_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_05_Low_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_Boulders_01_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Cliff_Wall_Boulders_02_gr_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Garland_NewYear_Test",
+        "libId": "newyear"
+      },
+      {
+        "name": "Garland_NewYear_Test 1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Garland_Vilhou_2_Low",
+        "libId": "newyear"
+      },
+      {
+        "name": "Garland_Vilhou_3_Low",
+        "libId": "newyear"
+      },
+      {
+        "name": "Garland_Vilhou_4_Low",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_01_a_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_01_a_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_01_b_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_01_b_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_02_a_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_02_a_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_02_b_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_02_b_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_03_a_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_03_a_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_03_b_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Platform_03_b_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Ice_Stone_Platform_Light",
+        "libId": "newyear"
+      },
+      {
+        "name": "Icelake_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Icelake_02",
+        "libId": "newyear"
+      },
+      {
+        "name": "Icelake_03",
+        "libId": "newyear"
+      },
+      {
+        "name": "Marble_Rock_M_02_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Marble_Rock_M_02_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "NewYear2024_Country_Road_Combine_01_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "NewYear2024_Country_Road_Combine_02_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "NewYear2024_Country_Road_Combine_03_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "NewYear2024_MM_Remaster-Terrain-mesh",
+        "libId": "newyear"
+      },
+      {
+        "name": "Snowman_Blue_01",
+        "libId": "newyear"
+      },
+      {
+        "name": "Snowman_Blue_03",
+        "libId": "newyear"
+      },
+      {
+        "name": "Snowman_Red_02",
+        "libId": "newyear"
+      },
+      {
+        "name": "Snowman_Red_04",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_bdrop_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_beech_bare_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_beech_ded_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_beech_M_ded_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_beech_S_ded_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_beech_Sp_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_birch_bare_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_birch_L_ded_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_birch_S_ded_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_birch_Sp_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_Flat_Green_Fresh_L_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_Flat_Green_Fresh_M_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "Tree_Flat_Green_Fresh_S_sn",
+        "libId": "newyear"
+      },
+      {
+        "name": "tree1_sn_LOD0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Wooden_Pile_Garland_Medium_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Wooden_Pile_Garland_Medium_sn_sub1",
+        "libId": "newyear"
+      },
+      {
+        "name": "Wooden_Pile_Garland_sn_sub0",
+        "libId": "newyear"
+      },
+      {
+        "name": "Wooden_Pile_Garland_sn_sub1",
+        "libId": "newyear"
+      }
+    ],
+    "vehicle": [
+      {
+        "name": "Body_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sn_sub9",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub3",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub4",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub5",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub6",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub7",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub8",
+        "libId": "main"
+      },
+      {
+        "name": "Body_sub9",
+        "libId": "main"
+      }
+    ],
+    "terrain": [
+      {
+        "name": "Landscape",
+        "libId": "main"
+      },
+      {
+        "name": "Landscape_au",
+        "libId": "main"
+      },
+      {
+        "name": "Landscape_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_01",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_02",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_03",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_04",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_05",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_07",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_08",
+        "libId": "main"
+      },
+      {
+        "name": "Road_Asph_Crumbs_09",
+        "libId": "main"
+      },
+      {
+        "name": "road_c1",
+        "libId": "main"
+      },
+      {
+        "name": "road_c1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_c2",
+        "libId": "main"
+      },
+      {
+        "name": "road_c2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_con_t1_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "road_con_t1_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "road_con_t1_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "road_con_t1_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "road_con_t2",
+        "libId": "main"
+      },
+      {
+        "name": "road_con_t2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Road_crumbs",
+        "libId": "main"
+      },
+      {
+        "name": "Road_crumbs_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_end1",
+        "libId": "main"
+      },
+      {
+        "name": "road_end1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Road_sq_con",
+        "libId": "main"
+      },
+      {
+        "name": "Road_sq_con_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq1",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq2",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq3",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq3_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq4",
+        "libId": "main"
+      },
+      {
+        "name": "road_sq4_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_square3_low",
+        "libId": "main"
+      },
+      {
+        "name": "road_square4_low",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_h1",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_h1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_h2",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_h2 1",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_h2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_rise",
+        "libId": "main"
+      },
+      {
+        "name": "road_st_rise_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_st1",
+        "libId": "main"
+      },
+      {
+        "name": "road_st1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_st2",
+        "libId": "main"
+      },
+      {
+        "name": "road_st2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_st3",
+        "libId": "main"
+      },
+      {
+        "name": "road_st3_sn",
+        "libId": "main"
+      },
+      {
+        "name": "road_t1",
+        "libId": "main"
+      },
+      {
+        "name": "road_t1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_c1",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_c1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_end1",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_end1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st_h1",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st_h1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st1",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st2",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st2_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st3",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_st3_sn",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_t1",
+        "libId": "main"
+      },
+      {
+        "name": "roadb_t1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01a_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01a_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01a_au_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01a_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01a_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01a_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01b_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01b_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01b_au_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01b_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01b_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01b_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01c_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01c_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01c_au_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01c_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01c_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01c_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01d_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01d_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01d_au_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01d_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01d_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_01d_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_02_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_02_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_02_au_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_02_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_03_au_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_03_au_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_03_au_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_03_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_03_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Sandal_Сountry_Road_Combine_03_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "SandalMMRemaster-Terrain_Autumn-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "SandalMMRemaster-Terrain-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "SandboxLandingMMRemaster-Terrain-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "SandboxMMRemaster-Terrain_1-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "SandboxMMRemaster-Terrain_Autumn-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "SandboxMMRemaster-Terrain-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "SandboxWinterMMRemaster-Terrain-mesh",
+        "libId": "main"
+      },
+      {
+        "name": "Slope_1",
+        "libId": "main"
+      },
+      {
+        "name": "Slope_1_brick",
+        "libId": "main"
+      },
+      {
+        "name": "Slope_1_sn",
+        "libId": "main"
+      },
+      {
+        "name": "slope_1c",
+        "libId": "main"
+      },
+      {
+        "name": "slope_1c_sn",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_01_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_01_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_01_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_01_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_01_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_01_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_02_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_02_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_02_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_02_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_02_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_02_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_03_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_03_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_03_sn_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_03_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_03_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_03_sub2",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_04_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_04_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_04_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_04_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_05_sn_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_05_sn_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_05_sub0",
+        "libId": "main"
+      },
+      {
+        "name": "Сountry_Road_Combine_05_sub1",
+        "libId": "main"
+      },
+      {
+        "name": "Landscape_sn",
+        "libId": "newyear"
+      }
+    ]
+  }
+}

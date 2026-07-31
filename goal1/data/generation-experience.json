@@ -1,0 +1,13 @@
+{
+  "rounds": [],
+  "rules": [
+    "评估仅关注 gameplay 道具（structure/terrain/vehicle），natural/decoration/other 仅作视觉填充不计入评分",
+    "structure 是核心掩体道具，在任何地图都应占 gameplay 的 40-70%",
+    "terrain 提供地形变化（悬崖、斜坡），应占 gameplay 的 20-50%",
+    "vehicle 是可选类别，参考地图中通常 ≤5%，仅在明确需要时加入",
+    "small 尺寸 halfX≈28K, medium≈90K, large≈210K",
+    "不对称地图用 style=asymmetric + symmetry=null",
+    "propSelection 中 natural 类用于视觉填充（80-300），不计入质量评估",
+    "密度调整：若 gameplay 道具 < 参考的 30%，下次自动增倍 gameplay count"
+  ]
+}

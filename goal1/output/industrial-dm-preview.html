@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>industrial-dm — 3D 地图预览</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { overflow:hidden; background:#1a1a2e; font-family:system-ui,sans-serif; }
+  canvas { display:block; }
+
+  #panel { position:fixed; top:12px; right:12px; background:rgba(0,0,0,0.75); color:#ccc;
+    border-radius:8px; padding:12px 14px; font-size:13px; min-width:180px; z-index:10; }
+  #panel h3 { color:#fff; margin:0 0 8px; font-size:14px; }
+  #panel button { display:block; width:100%; margin:4px 0; padding:6px 10px; border-radius:4px;
+    border:1px solid #555; background:#333; color:#ddd; cursor:pointer; font-size:12px; }
+  #panel button:hover { background:#444; border-color:#888; }
+  #panel button.active { background:#2d6a4f; border-color:#40916c; color:#fff; }
+  #panel .hint { font-size:10px; color:#888; margin-top:6px; line-height:1.5; }
+
+  #legend { position:fixed; top:12px; left:12px; background:rgba(0,0,0,0.75); color:#ccc;
+    border-radius:8px; padding:10px 12px; font-size:12px; z-index:10; }
+  #legend h4 { color:#fff; margin:0 0 6px; font-size:13px; }
+
+  #loading { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    color:#fff; font-size:18px; z-index:20; }
+</style>
+</head>
+<body>
+<div id="loading">加载中...</div>
+
+<div id="legend">
+  <h4>分类图例</h4>
+  <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="natural" onchange="toggleCategory('natural',this.checked)">
+          <span style="width:14px;height:14px;background:#4caf50;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">自然 (25)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="structure" onchange="toggleCategory('structure',this.checked)">
+          <span style="width:14px;height:14px;background:#9e9e9e;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">建筑 (90)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="decoration" onchange="toggleCategory('decoration',this.checked)">
+          <span style="width:14px;height:14px;background:#2196f3;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">装饰 (15)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="terrain" onchange="toggleCategory('terrain',this.checked)">
+          <span style="width:14px;height:14px;background:#795548;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">地形 (10)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="other" onchange="toggleCategory('other',this.checked)">
+          <span style="width:14px;height:14px;background:#9c27b0;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">其他 (10)</span>
+        </label>
+</div>
+
+<div id="panel">
+  <h3>industrial-dm</h3>
+  <div style="font-size:11px;color:#aaa;margin-bottom:8px">
+    道具: 150 · 材质: 67<br>
+    尺寸: 160,887.203 × 8,208.923 (x:z = 19.6:1)
+  </div>
+  <button id="btn-collision" class="" >显示碰撞层</button>
+  <button id="btn-reset">重置视角</button>
+  <button id="btn-top">俯视图</button>
+  <button id="btn-wireframe">线框模式</button>
+  <div class="hint">🖱 旋转 / 缩放 / 平移<br>双击重置视角</div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const PROPS = [{"id":0,"name":"Saw_02_sn_sub2","pos":[-31465.52734375,0,337.2568054199219],"rot":[0,1.333837866783142,0],"scl":[1,1,1],"cat":"other"},{"id":1,"name":"Barrels_Cluster_02_sn","pos":[78322.6796875,0,353.7220764160156],"rot":[0,3.6469056606292725,0],"scl":[1,1,1],"cat":"structure"},{"id":2,"name":"fab_tow_LOD0_sub6","pos":[-21857.837890625,0,-1667.947509765625],"rot":[0,2.2516584396362305,0],"scl":[1,1,1],"cat":"structure"},{"id":3,"name":"Conc_slab_03","pos":[-55143.66796875,0,-3444.92919921875],"rot":[0,5.44724178314209,0],"scl":[1,1,1],"cat":"structure"},{"id":4,"name":"Saw_01_sn_sub0","pos":[1175.1480712890625,0,-294.44866943359375],"rot":[0,1.935388207435608,0],"scl":[1,1,1],"cat":"other"},{"id":5,"name":"Graffiti_Wall_Text_02","pos":[-43501.75,0,-534.188232421875],"rot":[0,5.840672492980957,0],"scl":[1,1,1],"cat":"structure"},{"id":6,"name":"fab_tow2_sn_sub2","pos":[-14829.0791015625,0,-283.9112548828125],"rot":[0,5.856957912445068,0],"scl":[1,1,1],"cat":"structure"},{"id":7,"name":"Wall_Edge_E","pos":[80267.90625,0,1277.72509765625],"rot":[0,0.1407121866941452,0],"scl":[1,1,1],"cat":"structure"},{"id":8,"name":"rusty_tank","pos":[-31137.23046875,0,2540.567138671875],"rot":[0,2.807691812515259,0],"scl":[1,1,1],"cat":"structure"},{"id":9,"name":"Wall_new_cr_industrial","pos":[64097.40234375,0,-2215.99560546875],"rot":[0,0.7836540937423706,0],"scl":[1,1,1],"cat":"structure"},{"id":10,"name":"Saw_02_sub2","pos":[71049.0234375,0,2123.2666015625],"rot":[0,2.680058240890503,0],"scl":[1,1,1],"cat":"other"},{"id":11,"name":"wall_new_st_LOD0","pos":[45478.65234375,0,2307.8251953125],"rot":[0,2.346879482269287,0],"scl":[1,1,1],"cat":"structure"},{"id":12,"name":"Concrete_Floor_01a","pos":[523.00634765625,0,3263.372802734375],"rot":[0,0.2952041029930115,0],"scl":[1,1,1],"cat":"structure"},{"id":13,"name":"Industrial_Wall_Window_02d_sub1","pos":[-21873.591796875,0,216.51406860351562],"rot":[0,6.08897066116333,0],"scl":[1,1,1],"cat":"structure"},{"id":14,"name":"conc_plug_sn","pos":[-45714.0390625,0,3518.782958984375],"rot":[0,2.045577049255371,0],"scl":[1,1,1],"cat":"structure"},{"id":15,"name":"Industrial_Wall_Window_01d_sub2","pos":[27289.68359375,0,311.5567321777344],"rot":[0,3.2137608528137207,0],"scl":[1,1,1],"cat":"structure"},{"id":16,"name":"conc_fence_sn","pos":[8833.095703125,0,2927.3203125],"rot":[0,1.9871602058410645,0],"scl":[1,1,1],"cat":"structure"},{"id":17,"name":"conc_fence_2_sn","pos":[-50490.56640625,0,-1410.0966796875],"rot":[0,1.1568167209625244,0],"scl":[1,1,1],"cat":"structure"},{"id":18,"name":"Wall_Brick_02b_sub1","pos":[62859.5546875,0,3288.794921875],"rot":[0,3.884665012359619,0],"scl":[1,1,1],"cat":"structure"},{"id":19,"name":"Fabtow2_New_LOD2_sn_sub3","pos":[-79104.3515625,0,1261.0596923828125],"rot":[0,1.4352169036865234,0],"scl":[1,1,1],"cat":"structure"},{"id":20,"name":"Graffiti_Wall_Bat_01a","pos":[35150.7734375,0,-3178.393798828125],"rot":[0,2.4456565380096436,0],"scl":[1,1,1],"cat":"structure"},{"id":21,"name":"Bridge_Broken_Rise_1_sub1","pos":[70727.671875,0,347.9808349609375],"rot":[0,5.021160125732422,0],"scl":[1,1,1],"cat":"structure"},{"id":22,"name":"wall_new_cr_LOD0","pos":[-22144.166015625,0,866.4918823242188],"rot":[0,3.3144328594207764,0],"scl":[1,1,1],"cat":"structure"},{"id":23,"name":"Pipe_01","pos":[-71660.703125,0,-1614.369384765625],"rot":[0,2.1612162590026855,0],"scl":[1,1,1],"cat":"structure"},{"id":24,"name":"Wall_Brick_02b_sub0","pos":[-71296.4140625,0,1655.6270751953125],"rot":[0,3.852236032485962,0],"scl":[1,1,1],"cat":"structure"},{"id":25,"name":"Barrel_05","pos":[37576.06640625,0,949.705322265625],"rot":[0,3.2230255603790283,0],"scl":[1,1,1],"cat":"structure"},{"id":26,"name":"Industrial_Wall_Window_02a_sub2","pos":[40716.0859375,0,-3922.867431640625],"rot":[0,1.1755613088607788,0],"scl":[1,1,1],"cat":"structure"},{"id":27,"name":"Barrels_Cluster_01_sn","pos":[51727.86328125,0,-3353.084716796875],"rot":[0,2.545560359954834,0],"scl":[1,1,1],"cat":"structure"},{"id":28,"name":"fab_tow2_sub2","pos":[-65269.28515625,0,2517.22314453125],"rot":[0,1.772806167602539,0],"scl":[1,1,1],"cat":"structure"},{"id":29,"name":"Saw_01_sub4","pos":[-55789.04296875,0,2518.7373046875],"rot":[0,5.736241340637207,0],"scl":[1,1,1],"cat":"other"},{"id":30,"name":"Industrial_Wall_Bottom_02_sub0","pos":[-36787.2734375,0,-2689.739990234375],"rot":[0,2.922825813293457,0],"scl":[1,1,1],"cat":"structure"},{"id":31,"name":"Bridge_Broken_Rise_2_sub2","pos":[44427.1484375,0,-3901.372802734375],"rot":[0,5.646407604217529,0],"scl":[1,1,1],"cat":"structure"},{"id":32,"name":"Saw_01_sn_sub6","pos":[65096.515625,0,1936.6622314453125],"rot":[0,2.833345651626587,0],"scl":[1,1,1],"cat":"other"},{"id":33,"name":"Saw_01_sub5","pos":[12233.2470703125,0,2534.781005859375],"rot":[0,3.787863254547119,0],"scl":[1,1,1],"cat":"other"},{"id":34,"name":"Industrial_Roof_S_sub1","pos":[23570.93359375,0,-2155.652587890625],"rot":[0,3.57563853263855,0],"scl":[1,1,1],"cat":"structure"},{"id":35,"name":"industrial_pipe_sub3","pos":[-28940.693359375,0,-886.5255737304688],"rot":[0,6.256767749786377,0],"scl":[1,1,1],"cat":"structure"},{"id":36,"name":"Conc_slab_04_sn","pos":[23591.33984375,0,3211.07373046875],"rot":[0,2.3364486694335938,0],"scl":[1,1,1],"cat":"structure"},{"id":37,"name":"Saw_01_sn_sub1","pos":[26528.017578125,0,-4050.496337890625],"rot":[0,1.2714240550994873,0],"scl":[1,1,1],"cat":"other"},{"id":38,"name":"Wall_Frame_S","pos":[-5075.2099609375,0,3624.077880859375],"rot":[0,1.5534658432006836,0],"scl":[1,1,1],"cat":"structure"},{"id":39,"name":"Fabtow2_New_LOD2_sn_sub1","pos":[-64855.2578125,0,2861.552001953125],"rot":[0,0.4761323928833008,0],"scl":[1,1,1],"cat":"structure"},{"id":40,"name":"Wall_Pieces_03_sub0","pos":[16285.9716796875,0,-3397.11572265625],"rot":[0,0.16977442800998688,0],"scl":[1,1,1],"cat":"structure"},{"id":41,"name":"Fabtow1_New_LOD2_sn_sub3","pos":[-8263.9697265625,0,-3649.189697265625],"rot":[0,4.163768768310547,0],"scl":[1,1,1],"cat":"structure"},{"id":42,"name":"Conc_slab_04_sn","pos":[-14447.9150390625,0,-3513.497314453125],"rot":[0,3.3981821537017822,0],"scl":[1,1,1],"cat":"structure"},{"id":43,"name":"Vilhou_2_New_Wood_Low","pos":[25839.59765625,0,-2252.1298828125],"rot":[0,2.5330169200897217,0],"scl":[1,1,1],"cat":"structure"},{"id":44,"name":"Pipe_Valve","pos":[-15513.0244140625,0,-989.5614013671875],"rot":[0,5.521464824676514,0],"scl":[1,1,1],"cat":"structure"},{"id":45,"name":"fab_tow_sn_LOD0_sub3","pos":[9526.576171875,0,-1074.802978515625],"rot":[0,2.6414976119995117,0],"scl":[1,1,1],"cat":"structure"},{"id":46,"name":"Fence_02b_Post","pos":[-28588.19921875,0,715.6319580078125],"rot":[0,5.20813512802124,0],"scl":[1,1,1],"cat":"structure"},{"id":47,"name":"Saw_02_sn_sub4","pos":[13247.251953125,0,-3067.50439453125],"rot":[0,4.781362056732178,0],"scl":[1,1,1],"cat":"other"},{"id":48,"name":"Wall_new_st_industrial_3_sub1","pos":[25688.62890625,0,1940.1016845703125],"rot":[0,3.9581916332244873,0],"scl":[1,1,1],"cat":"structure"},{"id":49,"name":"fab_tow_LOD2_sub4","pos":[-18496.21875,0,-1857.4222412109375],"rot":[0,3.3165671825408936,0],"scl":[1,1,1],"cat":"structure"},{"id":50,"name":"fab_tow2_sub5","pos":[-32312.294921875,0,-3376.2392578125],"rot":[0,1.4845902919769287,0],"scl":[1,1,1],"cat":"structure"},{"id":51,"name":"fab_tow_sn_LOD0_sub4","pos":[64722.234375,0,-18.936206817626953],"rot":[0,2.3031153678894043,0],"scl":[1,1,1],"cat":"structure"},{"id":52,"name":"s_conc_fence_2_sn","pos":[-65137.9296875,0,1971.87451171875],"rot":[0,5.472593784332275,0],"scl":[1,1,1],"cat":"structure"},{"id":53,"name":"Industrial_Wall_Window_01b_sub0","pos":[-37546.55859375,0,2782.527587890625],"rot":[0,3.350112199783325,0],"scl":[1,1,1],"cat":"structure"},{"id":54,"name":"Wall_Pieces_03_sub1","pos":[-63389.37890625,0,-2282.649658203125],"rot":[0,0.8445610404014587,0],"scl":[1,1,1],"cat":"structure"},{"id":55,"name":"fab_tow_LOD2_sub3","pos":[22403.86328125,0,-97.71915435791016],"rot":[0,4.584837913513184,0],"scl":[1,1,1],"cat":"structure"},{"id":56,"name":"Industrial_Wall_Window_01a_sub0","pos":[77990.5078125,0,-4096.36865234375],"rot":[0,3.749687433242798,0],"scl":[1,1,1],"cat":"structure"},{"id":57,"name":"fab_tow_LOD2_sub0","pos":[-32608.8828125,0,-180.44053649902344],"rot":[0,1.383378505706787,0],"scl":[1,1,1],"cat":"structure"},{"id":58,"name":"Conc_slab_02_sn","pos":[-62742.8984375,0,3226.251953125],"rot":[0,1.6920443773269653,0],"scl":[1,1,1],"cat":"structure"},{"id":59,"name":"Pipe_Corner_S","pos":[-47329.578125,0,3404.715087890625],"rot":[0,2.156324625015259,0],"scl":[1,1,1],"cat":"structure"},{"id":60,"name":"Graffiti_Wall_Bat_01b","pos":[17727.443359375,0,3090.710205078125],"rot":[0,4.871792793273926,0],"scl":[1,1,1],"cat":"structure"},{"id":61,"name":"s_conc_plug_sn","pos":[-7196.7509765625,0,2779.326171875],"rot":[0,3.0263161659240723,0],"scl":[1,1,1],"cat":"structure"},{"id":62,"name":"Wall_Edge_M","pos":[-32004.94140625,0,-48.16621398925781],"rot":[0,6.001064777374268,0],"scl":[1,1,1],"cat":"structure"},{"id":63,"name":"wall_new_e1_LOD0","pos":[-38448.2578125,0,-1658.6287841796875],"rot":[0,0.25813576579093933,0],"scl":[1,1,1],"cat":"structure"},{"id":64,"name":"Fabtow1_New_LOD2_sn_sub5","pos":[28786.443359375,0,36.466941833496094],"rot":[0,4.000004291534424,0],"scl":[1,1,1],"cat":"structure"},{"id":65,"name":"Wall_new_3w_industrial","pos":[77435.3828125,0,-2330.474609375],"rot":[0,0.8630699515342712,0],"scl":[1,1,1],"cat":"structure"},{"id":66,"name":"Pipe_Support_Block","pos":[-18582.830078125,0,1733.5064697265625],"rot":[0,5.289641380310059,0],"scl":[1,1,1],"cat":"structure"},{"id":67,"name":"Wall_new_e1_industrial_3_sub1","pos":[-17736.48046875,0,-915.0772705078125],"rot":[0,0.6912630200386047,0],"scl":[1,1,1],"cat":"structure"},{"id":68,"name":"Wall_new_e2_industrial_3_sub0","pos":[17720.818359375,0,-1593.82666015625],"rot":[0,2.8645827770233154,0],"scl":[1,1,1],"cat":"structure"},{"id":69,"name":"Industrial_Wall_Window_02d_sub2","pos":[-41240.6015625,0,-3964.86767578125],"rot":[0,6.180693626403809,0],"scl":[1,1,1],"cat":"structure"},{"id":70,"name":"Conc_pile_sn","pos":[13791.8662109375,0,-1310.085205078125],"rot":[0,3.0900373458862305,0],"scl":[1,1,1],"cat":"structure"},{"id":71,"name":"fab_tow2_sn_sub0","pos":[7200.19873046875,0,-589.5121459960938],"rot":[0,4.585480690002441,0],"scl":[1,1,1],"cat":"structure"},{"id":72,"name":"Wall_Frame_E","pos":[16076.5576171875,0,1315.8958740234375],"rot":[0,4.727780342102051,0],"scl":[1,1,1],"cat":"structure"},{"id":73,"name":"Industrial_Wall_Window_01b_sub2","pos":[-20423.8359375,0,511.54193115234375],"rot":[0,0.33956390619277954,0],"scl":[1,1,1],"cat":"structure"},{"id":74,"name":"Concrete_Floor_02b_sub1","pos":[-3028.260498046875,0,128.5305633544922],"rot":[0,4.608480453491211,0],"scl":[1,1,1],"cat":"structure"},{"id":75,"name":"Fence_02a","pos":[21359.478515625,0,751.3646850585938],"rot":[0,4.4259114265441895,0],"scl":[1,1,1],"cat":"structure"},{"id":76,"name":"wall_new_e1_LOD0","pos":[21398.66796875,0,935.6607666015625],"rot":[0,5.246281623840332,0],"scl":[1,1,1],"cat":"structure"},{"id":77,"name":"Wall_Brick_01a_sub0","pos":[24775.052734375,0,-282.8236999511719],"rot":[0,2.377572536468506,0],"scl":[1,1,1],"cat":"structure"},{"id":78,"name":"Bridge_Broken_Rise_1_sub0","pos":[486.5737609863281,0,-332.85479736328125],"rot":[0,6.206561088562012,0],"scl":[1,1,1],"cat":"structure"},{"id":79,"name":"Wall_Brick_02b_sub0","pos":[661.5740966796875,0,417.80841064453125],"rot":[0,3.586230993270874,0],"scl":[1,1,1],"cat":"structure"},{"id":80,"name":"Industrial_Wall_Bottom_01_sub1","pos":[21451.439453125,0,1353.54248046875],"rot":[0,5.764391899108887,0],"scl":[1,1,1],"cat":"structure"},{"id":81,"name":"Wall_Brick_02b_sub1","pos":[4898.13623046875,0,345.0403747558594],"rot":[0,1.7467057704925537,0],"scl":[1,1,1],"cat":"structure"},{"id":82,"name":"Industrial_Wall_Bottom_01_sub0","pos":[-2170.419189453125,0,1054.49951171875],"rot":[0,2.991325855255127,0],"scl":[1,1,1],"cat":"structure"},{"id":83,"name":"Wall_Pieces_03_sub1","pos":[8700.8671875,0,-153.8673553466797],"rot":[0,4.3592095375061035,0],"scl":[1,1,1],"cat":"structure"},{"id":84,"name":"Industrial_Wall_Window_02d_sub2","pos":[-2049.97509765625,0,-276.43646240234375],"rot":[0,3.9830844402313232,0],"scl":[1,1,1],"cat":"structure"},{"id":85,"name":"Conc_pile","pos":[-2886.135009765625,0,205.21624755859375],"rot":[0,5.3934407234191895,0],"scl":[1,1,1],"cat":"structure"},{"id":86,"name":"industrial_pipe_sub0","pos":[11500.78125,0,-529.1111450195312],"rot":[0,1.9732271432876587,0],"scl":[1,1,1],"cat":"structure"},{"id":87,"name":"Wall_new_e1_industrial_3_sub1","pos":[10168.310546875,0,1234.1165771484375],"rot":[0,6.120502471923828,0],"scl":[1,1,1],"cat":"structure"},{"id":88,"name":"Industrial_Wall_Window_02d_sub0","pos":[14256.8359375,0,186.24496459960938],"rot":[0,3.7710766792297363,0],"scl":[1,1,1],"cat":"structure"},{"id":89,"name":"Fence_01c","pos":[6986.53466796875,0,-460.3887939453125],"rot":[0,5.382477283477783,0],"scl":[1,1,1],"cat":"structure"},{"id":90,"name":"fab_tow_LOD2_sub1","pos":[-4993.994140625,0,155.16226196289062],"rot":[0,4.597262382507324,0],"scl":[1,1,1],"cat":"structure"},{"id":91,"name":"Saw_02_sub4","pos":[-159.42347717285156,0,-30.946474075317383],"rot":[0,4.641053199768066,0],"scl":[1,1,1],"cat":"other"},{"id":92,"name":"Wall_new_e3_industrial","pos":[10849.9345703125,0,773.85498046875],"rot":[0,5.044485092163086,0],"scl":[1,1,1],"cat":"structure"},{"id":93,"name":"Industrial_Wall_Bottom_Door_02_sub2","pos":[7954.46533203125,0,390.14495849609375],"rot":[0,4.253842353820801,0],"scl":[1,1,1],"cat":"structure"},{"id":94,"name":"industrial_pipe_sub4","pos":[-26961.705078125,0,234.1322479248047],"rot":[0,4.523731708526611,0],"scl":[1,1,1],"cat":"structure"},{"id":95,"name":"Conc_slab_02_sn","pos":[-6911.0869140625,0,862.1651611328125],"rot":[0,3.7215352058410645,0],"scl":[1,1,1],"cat":"structure"},{"id":96,"name":"Wall_new_st_industrial_3_sub0","pos":[16110.41015625,0,687.9879150390625],"rot":[0,4.778223991394043,0],"scl":[1,1,1],"cat":"structure"},{"id":97,"name":"wall_new_e1_sn_LOD0","pos":[14492.6826171875,0,198.81240844726562],"rot":[0,3.464236259460449,0],"scl":[1,1,1],"cat":"structure"},{"id":98,"name":"Conc_pile_b","pos":[12356.6259765625,0,701.6178588867188],"rot":[0,4.964049339294434,0],"scl":[1,1,1],"cat":"structure"},{"id":99,"name":"Saw_01_sn_sub2","pos":[-13519.3359375,0,-489.77191162109375],"rot":[0,2.208777666091919,0],"scl":[1,1,1],"cat":"other"},{"id":100,"name":"Ivy_Ground_au","pos":[22866.173828125,0,-279.5415954589844],"rot":[0,6.238112449645996,0],"scl":[1,1,1],"cat":"natural"},{"id":101,"name":"Tree_birch_L_ded_sn","pos":[-64109.39453125,0,3392.07861328125],"rot":[0,0.5650855302810669,0],"scl":[1,1,1],"cat":"natural"},{"id":102,"name":"Cliff_bg_e_sn","pos":[12589.310546875,0,-3743.657958984375],"rot":[0,0.5062294006347656,0],"scl":[1,1,1],"cat":"natural"},{"id":103,"name":"Tree_Birch_Bare_sub1","pos":[11551.888671875,0,-3593.89794921875],"rot":[0,4.454243183135986,0],"scl":[1,1,1],"cat":"natural"},{"id":104,"name":"Tree_Birch_S_dead_sub0","pos":[58199.1015625,0,-2368.36083984375],"rot":[0,6.199186325073242,0],"scl":[1,1,1],"cat":"natural"},{"id":105,"name":"Snowman_Red_05","pos":[15354.8759765625,0,1739.05712890625],"rot":[0,0.5265037417411804,0],"scl":[1,1,1],"cat":"natural"},{"id":106,"name":"Log_02_snowcap","pos":[12232.4208984375,0,-2693.21240234375],"rot":[0,0.9252376556396484,0],"scl":[1,1,1],"cat":"natural"},{"id":107,"name":"Cliff_bg_b_sn","pos":[-32442.73828125,0,-38.97856521606445],"rot":[0,4.035131931304932,0],"scl":[1,1,1],"cat":"natural"},{"id":108,"name":"Flower_A","pos":[15641.36328125,0,-2840.3310546875],"rot":[0,0.6185950040817261,0],"scl":[1,1,1],"cat":"natural"},{"id":109,"name":"Ivy_Liana_M","pos":[-72452.375,0,-936.9019775390625],"rot":[0,3.1763341426849365,0],"scl":[1,1,1],"cat":"natural"},{"id":110,"name":"Cliff_01","pos":[42449.19140625,0,994.1226196289062],"rot":[0,5.212905406951904,0],"scl":[1,1,1],"cat":"natural"},{"id":111,"name":"Cliff_Corner_04_sn_sub1","pos":[64541.796875,0,3919.364013671875],"rot":[0,1.4910622835159302,0],"scl":[1,1,1],"cat":"natural"},{"id":112,"name":"Bush_Sprout_Cluster_S_02","pos":[-75671.21875,0,1199.958740234375],"rot":[0,4.675787925720215,0],"scl":[1,1,1],"cat":"natural"},{"id":113,"name":"Garland_M","pos":[-22314.123046875,0,3089.6806640625],"rot":[0,1.1100523471832275,0],"scl":[1,1,1],"cat":"natural"},{"id":114,"name":"Tree_Birch_L_au_sub1","pos":[45636.95703125,0,-1863.347900390625],"rot":[0,0.13423074781894684,0],"scl":[1,1,1],"cat":"natural"},{"id":115,"name":"Wooden_Pile_Garland_Medium_sn_sub1","pos":[71433.6484375,0,-3275.019287109375],"rot":[0,3.4951436519622803,0],"scl":[1,1,1],"cat":"natural"},{"id":116,"name":"grass_L2_au","pos":[26142.845703125,0,-2465.8271484375],"rot":[0,1.2608953714370728,0],"scl":[1,1,1],"cat":"natural"},{"id":117,"name":"Cliff_bg_b","pos":[-6770.15478515625,0,-2764.8740234375],"rot":[0,0.49986961483955383,0],"scl":[1,1,1],"cat":"natural"},{"id":118,"name":"Flower_C","pos":[43917.50390625,0,-2217.169677734375],"rot":[0,0.7059603929519653,0],"scl":[1,1,1],"cat":"natural"},{"id":119,"name":"Garland_Vilhou_4","pos":[-66390.2734375,0,1276.1285400390625],"rot":[0,4.008422374725342,0],"scl":[1,1,1],"cat":"natural"},{"id":120,"name":"Tree_Birch_L_dead_au_sub0","pos":[-16161.828125,0,3175.4970703125],"rot":[0,0.9540238976478577,0],"scl":[1,1,1],"cat":"natural"},{"id":121,"name":"Christmas_Tree","pos":[49505.3515625,0,3301.0341796875],"rot":[0,1.085837483406067,0],"scl":[1,1,1],"cat":"natural"},{"id":122,"name":"Tree_Birch_M_sub0","pos":[5580.29736328125,0,1637.2340087890625],"rot":[0,2.6567795276641846,0],"scl":[1,1,1],"cat":"natural"},{"id":123,"name":"Garland_Crowler","pos":[49301.90234375,0,3533.408447265625],"rot":[0,3.32619571685791,0],"scl":[1,1,1],"cat":"natural"},{"id":124,"name":"Snowman_Blue_04","pos":[27287.734375,0,-3335.120361328125],"rot":[0,2.755258321762085,0],"scl":[1,1,1],"cat":"natural"},{"id":125,"name":"Vilhou_1 b_sn_sub7","pos":[57326.60546875,0,-1885.4315185546875],"rot":[0,1.1683887243270874,0],"scl":[1,1,1],"cat":"decoration"},{"id":126,"name":"Vilhou_4_sub6","pos":[80539.796875,0,3089.7470703125],"rot":[0,1.1352078914642334,0],"scl":[1,1,1],"cat":"decoration"},{"id":127,"name":"Vilhou_1_sn_sub1","pos":[-67961.171875,0,-4112.640625],"rot":[0,3.9798312187194824,0],"scl":[1,1,1],"cat":"decoration"},{"id":128,"name":"Scarecrow_01a","pos":[-9212.9404296875,0,1335.652587890625],"rot":[0,6.128298759460449,0],"scl":[1,1,1],"cat":"decoration"},{"id":129,"name":"Halloween_Decor_Flags_01_S","pos":[29653.533203125,0,2256.21533203125],"rot":[0,5.211767673492432,0],"scl":[1,1,1],"cat":"decoration"},{"id":130,"name":"Vilhou_1_sub3","pos":[-67698.890625,0,-1823.2847900390625],"rot":[0,0.010090477764606476,0],"scl":[1,1,1],"cat":"decoration"},{"id":131,"name":"Spiderweb_Vilhou_3a","pos":[-4835.927734375,0,-1020.9302368164062],"rot":[0,4.189512729644775,0],"scl":[1,1,1],"cat":"decoration"},{"id":132,"name":"Light_Pole_01","pos":[-46978.50390625,0,-1771.7706298828125],"rot":[0,3.8624966144561768,0],"scl":[1,1,1],"cat":"decoration"},{"id":133,"name":"Vilhou_2 b_sub6","pos":[47074.3515625,0,1643.03076171875],"rot":[0,5.667454242706299,0],"scl":[1,1,1],"cat":"decoration"},{"id":134,"name":"Vilhou_1_sn_sub7","pos":[79118.765625,0,3215.319091796875],"rot":[0,3.3262102603912354,0],"scl":[1,1,1],"cat":"decoration"},{"id":135,"name":"Vilhou_2_sn_sub5","pos":[80506.5859375,0,266.599609375],"rot":[0,0.6075758337974548,0],"scl":[1,1,1],"cat":"decoration"},{"id":136,"name":"Vilhou_4_sn_sub11","pos":[45947.21484375,0,2615.846435546875],"rot":[0,1.362147569656372,0],"scl":[1,1,1],"cat":"decoration"},{"id":137,"name":"Scarecrow_05a","pos":[23262.259765625,0,-2616.801025390625],"rot":[0,0.841853141784668,0],"scl":[1,1,1],"cat":"decoration"},{"id":138,"name":"Vilhou_4_sn_sub2","pos":[-78979.0234375,0,2556.384521484375],"rot":[0,4.76283073425293,0],"scl":[1,1,1],"cat":"decoration"},{"id":139,"name":"Vilhou_2_sn_sub7","pos":[-2532.607666015625,0,-200.2566375732422],"rot":[0,3.2641146183013916,0],"scl":[1,1,1],"cat":"decoration"},{"id":140,"name":"Sandal_Сountry_Road_Combine_01b_au_sub0","pos":[42045.62109375,0,4096.28271484375],"rot":[0,5.126407623291016,0],"scl":[1,1,1],"cat":"terrain"},{"id":141,"name":"Landscape_au","pos":[-36652.06640625,0,3364.408447265625],"rot":[0,0.7113387584686279,0],"scl":[1,1,1],"cat":"terrain"},{"id":142,"name":"Road_Asph_Crumbs_01","pos":[-80347.40625,0,1671.971435546875],"rot":[0,3.157484769821167,0],"scl":[1,1,1],"cat":"terrain"},{"id":143,"name":"road_st_h1_sn","pos":[15711.1845703125,0,1278.59375],"rot":[0,2.069108009338379,0],"scl":[1,1,1],"cat":"terrain"},{"id":144,"name":"Sandal_Сountry_Road_Combine_01a_au_sub2","pos":[-49581.83203125,0,-1837.1668701171875],"rot":[0,2.9152238368988037,0],"scl":[1,1,1],"cat":"terrain"},{"id":145,"name":"road_end1_sn","pos":[45230.7109375,0,1793.7667236328125],"rot":[0,4.411879539489746,0],"scl":[1,1,1],"cat":"terrain"},{"id":146,"name":"Sandal_Сountry_Road_Combine_02_au_sub0","pos":[19402.328125,0,3130.76708984375],"rot":[0,1.2601194381713867,0],"scl":[1,1,1],"cat":"terrain"},{"id":147,"name":"road_sq3_sn","pos":[-61910.69140625,0,3312.559814453125],"rot":[0,2.023803234100342,0],"scl":[1,1,1],"cat":"terrain"},{"id":148,"name":"road_st2","pos":[-47630.87109375,0,2472.3603515625],"rot":[0,1.821182370185852,0],"scl":[1,1,1],"cat":"terrain"},{"id":149,"name":"roadb_st1_sn","pos":[-26634.482421875,0,883.6812744140625],"rot":[0,3.1742985248565674,0],"scl":[1,1,1],"cat":"terrain"}];
+const COLORS = {"natural":5025616,"structure":10395294,"decoration":2201331,"terrain":7951688,"vehicle":16007990,"other":10233776};
+const COLLISION = {"col1":{"shapesType1":[],"shapesType2":[],"shapesType3":[]},"col2":{"shapesType1":[],"shapesType2":[],"shapesType3":[]}};
+
+const centerX = 96.1953125, centerZ = -8.178955078125;
+const camDist = 88487.96171875001;
+const boxBase = 1340.7266927083333;
+const spanX = 160887.203125, spanY = 1, spanZ = 8208.92333984375;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1a1a2e);
+scene.fog = new THREE.Fog(0x1a1a2e, camDist * 2, camDist * 4);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = false;
+document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 100, camDist * 8);
+camera.position.set(centerX, camDist * 0.7, centerZ + camDist);
+camera.lookAt(centerX, 0, centerZ);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(centerX, 0, centerZ);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.48;
+controls.update();
+
+// ── 光照 ──
+scene.add(new THREE.AmbientLight(0x404060, 1.5));
+const dir = new THREE.DirectionalLight(0xffffff, 2);
+dir.position.set(centerX + camDist, camDist * 2, centerZ + camDist);
+scene.add(dir);
+const dir2 = new THREE.DirectionalLight(0x8888cc, 0.8);
+dir2.position.set(centerX - camDist, camDist, centerZ - camDist);
+scene.add(dir2);
+
+// ── 地面网格 ──
+const gridSize = Math.max(spanX, spanZ) * 1.1;
+const gridDiv = Math.max(40, Math.round(gridSize / 5000));
+const grid = new THREE.GridHelper(gridSize, gridDiv, 0x334455, 0x1a1a2e);
+grid.position.set(centerX, 0, centerZ);
+scene.add(grid);
+
+// Y 轴参考线（细红线标地面）
+const ySpan = Math.max(Math.abs(0), Math.abs(0), spanY);
+if (ySpan > 500) {
+  const yLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(centerX, -ySpan, centerZ), new THREE.Vector3(centerX, ySpan, centerZ)]),
+    new THREE.LineBasicMaterial({ color: 0x883333, transparent: true, opacity: 0.3 })
+  );
+  scene.add(yLine);
+}
+
+// ── 分类 → InstancedMesh ──
+const boxGeo = new THREE.BoxGeometry(1, 1, 1);
+const catMeshes = {};
+const catGroups = {};
+
+for (const [cat, color] of Object.entries(COLORS)) {
+  const count = PROPS.filter(p => p.cat === cat).length;
+  if (count === 0) continue;
+  const mat = new THREE.MeshPhongMaterial({ color, specular: 0x111111, shininess: 10, flatShading: true });
+  const mesh = new THREE.InstancedMesh(boxGeo, mat, count);
+  mesh.castShadow = false;
+  mesh.receiveShadow = false;
+  mesh.name = cat;
+  catMeshes[cat] = mesh;
+  scene.add(mesh);
+
+  const wireMat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.4 });
+  const wireMesh = new THREE.InstancedMesh(boxGeo, wireMat, count);
+  wireMesh.visible = false;
+  wireMesh.name = cat + '_wire';
+  catMeshes[cat + '_wire'] = wireMesh;
+  scene.add(wireMesh);
+}
+
+// 填充实例矩阵
+const dummy = new THREE.Object3D();
+const catIndices = {};
+for (const cat of Object.keys(COLORS)) catIndices[cat] = 0;
+
+for (const p of PROPS) {
+  const idx = catIndices[p.cat]++;
+  const sx = boxBase * (p.scl[0] || 1);
+  const sy = boxBase * (p.scl[1] || 1);
+  const sz = boxBase * (p.scl[2] || 1);
+  dummy.position.set(p.pos[0], p.pos[1], p.pos[2]);
+  dummy.rotation.set(p.rot[0], p.rot[1], p.rot[2]);
+  dummy.scale.set(sx, sy, sz);
+  dummy.updateMatrix();
+  catMeshes[p.cat].setMatrixAt(idx, dummy.matrix);
+  catMeshes[p.cat + '_wire'].setMatrixAt(idx, dummy.matrix);
+}
+for (const [cat, mesh] of Object.entries(catMeshes)) {
+  if (mesh.isInstancedMesh) { mesh.instanceMatrix.needsUpdate = true; mesh.count = mesh.count; }
+}
+
+// ── 碰撞层 (可选) ──
+let collisionGroup = null;
+let collisionBuilt = false;
+
+function buildCollision() {
+  if (collisionBuilt || !COLLISION) return;
+  collisionBuilt = true;
+  collisionGroup = new THREE.Group();
+  collisionGroup.name = 'collision';
+  collisionGroup.visible = false;
+
+  const col1Mat = new THREE.LineBasicMaterial({ color: 0xFF3333, transparent: true, opacity: 0.6 });
+  const col2Mat = new THREE.LineBasicMaterial({ color: 0x33FF33, transparent: true, opacity: 0.6 });
+
+  function addShapes(collision, mat) {
+    for (const d of (collision.shapesType1 || [])) {
+      const [px, py, pz, rx, ry, rz, sx, sy, sz] = d;
+      const geo = new THREE.BoxGeometry(sx || 100, sy || 100, sz || 100);
+      const edges = new THREE.EdgesGeometry(geo);
+      const line = new THREE.LineSegments(edges, mat);
+      line.position.set(px, py, pz);
+      line.rotation.set(rx, ry, rz);
+      collisionGroup.add(line);
+    }
+    for (const d of (collision.shapesType2 || [])) {
+      const f1 = d.f1, f2 = d.f2;
+      const [px, py, pz, rx, ry, rz] = d.data;
+      const geo = new THREE.BoxGeometry(f2 || 200, 5, f1 || 200);
+      const edges = new THREE.EdgesGeometry(geo);
+      const line = new THREE.LineSegments(edges, mat);
+      line.position.set(px, py, pz);
+      line.rotation.set(rx, ry, rz);
+      collisionGroup.add(line);
+    }
+    for (const d of (collision.shapesType3 || [])) {
+      const [px, py, pz, rx, ry, rz, v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z] = d.data;
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute([v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z], 3));
+      const line = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(v1x, v1y, v1z),
+          new THREE.Vector3(v2x, v2y, v2z),
+          new THREE.Vector3(v3x, v3y, v3z),
+          new THREE.Vector3(v1x, v1y, v1z),
+        ]),
+        mat
+      );
+      line.position.set(px, py, pz);
+      line.rotation.set(rx, ry, rz);
+      collisionGroup.add(line);
+    }
+  }
+
+  if (COLLISION.col1) addShapes(COLLISION.col1, col1Mat);
+  if (COLLISION.col2) addShapes(COLLISION.col2, col2Mat);
+  scene.add(collisionGroup);
+}
+
+// ── UI 交互 ──
+document.getElementById('loading').style.display = 'none';
+
+let wireframeMode = false;
+
+function toggleCategory(cat, visible) {
+  if (catMeshes[cat]) {
+    catMeshes[cat].visible = visible;
+    if (!wireframeMode) catMeshes[cat + '_wire'].visible = false;
+  }
+}
+
+function setWireframe(on) {
+  wireframeMode = on;
+  const btn = document.getElementById('btn-wireframe');
+  if (on) { btn.textContent = '实体模式'; btn.classList.add('active'); }
+  else { btn.textContent = '线框模式'; btn.classList.remove('active'); }
+  for (const [key, mesh] of Object.entries(catMeshes)) {
+    if (key.endsWith('_wire')) {
+      mesh.visible = on && catMeshes[key.replace('_wire', '')].visible;
+    } else {
+      mesh.visible = !on;
+    }
+  }
+}
+
+document.getElementById('btn-wireframe').addEventListener('click', () => setWireframe(!wireframeMode));
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  camera.position.set(centerX, camDist * 0.7, centerZ + camDist);
+  controls.target.set(centerX, 0, centerZ);
+  controls.update();
+});
+
+document.getElementById('btn-top').addEventListener('click', () => {
+  camera.position.set(centerX, camDist * 1.2, centerZ + 10);
+  controls.target.set(centerX, 0, centerZ);
+  controls.update();
+});
+
+const btnCol = document.getElementById('btn-collision');
+if (COLLISION) {
+  btnCol.addEventListener('click', () => {
+    buildCollision();
+    if (!collisionGroup) return;
+    collisionGroup.visible = !collisionGroup.visible;
+    btnCol.textContent = collisionGroup.visible ? '隐藏碰撞层' : '显示碰撞层';
+    btnCol.classList.toggle('active', collisionGroup.visible);
+  });
+} else {
+  btnCol.textContent = '(无碰撞数据)';
+  btnCol.disabled = true;
+  btnCol.style.opacity = '0.5';
+}
+
+window.addEventListener('dblclick', (e) => {
+  if (e.target.tagName === 'BUTTON' || e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') return;
+  camera.position.set(centerX, camDist * 0.7, centerZ + camDist);
+  controls.target.set(centerX, 0, centerZ);
+  controls.update();
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// 暴露给全局（legend checkbox 用）
+window.toggleCategory = toggleCategory;
+
+// ── 渲染循环 ──
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>

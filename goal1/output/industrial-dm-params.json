@@ -1,0 +1,13 @@
+{
+  "style": "asymmetric",
+  "size": "medium",
+  "propDensity": "medium",
+  "propSelection": [
+    { "category": "structure", "count": 70, "placement": "scattered" },
+    { "category": "structure", "count": 30, "placement": "clustered" },
+    { "category": "natural", "count": 25, "placement": "scattered" },
+    { "category": "decoration", "count": 15, "placement": "scattered" },
+    { "category": "terrain", "count": 10, "placement": "scattered" }
+  ],
+  "seed": 777
+}

@@ -1,0 +1,19 @@
+{
+  "name": "tanki-map-generator",
+  "version": "0.1.0",
+  "description": "自然语言 -> Tanki Online 地图生成器（目标1）",
+  "type": "module",
+  "main": "src/generate.js",
+  "bin": { "tanki-map": "src/generate.js" },
+  "scripts": {
+    "build-index": "node src/library-index.js",
+    "generate": "node src/generate.js",
+    "test": "node test/verify-roundtrip.js && node test/verify-layout.js && node test/verify-llm.js && node test/verify-generate.js",
+    "test:m2": "node test/verify-roundtrip.js",
+    "test:m3": "node test/verify-layout.js",
+    "test:m4": "node test/verify-llm.js",
+    "test:m5": "node test/verify-generate.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {}
+}
