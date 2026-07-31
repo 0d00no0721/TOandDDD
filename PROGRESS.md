@@ -2,7 +2,7 @@
 
 > 统筹 agent 维护本文件。实现 agent 完成里程碑后在此更新状态。
 
-最后更新：2026-07-26（第五次更新，全量里程碑完成）
+最后更新：2026-07-31（第六次更新，同步漏推文件）
 
 ---
 
@@ -10,7 +10,7 @@
 
 | 目标 | 分支 | 远程 HEAD | 状态 | 文件数 |
 |---|---|---|---|---|
-| 目标 1：自然语言 → 地图 | `goal1` | `03f0b09` | ✅ **全部完成**（M1✅ M2✅ M3✅ M4✅ M5✅） | 29 |
+| 目标 1：自然语言 → 地图 | `goal1` | `bb73559` | ✅ **全部完成**（M1✅ M2✅ M3✅ M4✅ M5✅） | 64 |
 | 目标 2：地图简化器 | `goal2` | `62b9c11` | 🟨 进行中（M1✅ M2✅ M3✅ M4✅ M5⬜） | 79（含 27 张预览 + 简化库）|
 
 状态图例：⬜ 未开始 / 🟨 进行中 / ✅ 完成 / ⛔ 阻塞
@@ -46,7 +46,8 @@ generate.js (M5)  — CLI 入口，端到端：输入 → 输出 map.bin
 ### goal1 分支提交历史（远程 origin/goal1）
 
 | Commit | 说明 |
-|---|---|
+|---|---|---|
+| `bb73559` | feat: 同步新增工具和测试输出 — train-loop/report-training/analyze-map/compare-maps/gen-params/preview-html + 14张参考地图 + M5测试输出 |
 | `03f0b09` | feat: 完成 M4 LLM理解层 + M5 CLI集成界面 |
 | `32fa902` | docs: 更新 HANDOFF.md — M3测试完成 + skill架构转变 + 真实地图分析结论 |
 | `aedbe35` | feat: 完成 skill 架构 — SKILL.md + 资源URL对照表 + 真实地图布局参考 |
@@ -54,10 +55,11 @@ generate.js (M5)  — CLI 入口，端到端：输入 → 输出 map.bin
 | `4c07305` | feat: 导入目标1已有代码（M1道具库索引 + M2序列化器 + M3布局层） |
 | `6fa808b` | chore: 初始仓库搭建 |
 
-### goal1 分支文件清单（29 文件）
+### goal1 分支文件清单（64 文件）
 
 ```
 goal1/
+├── .gitignore                      覆盖根 .gitignore（允许 *.bin/*.json）
 ├── package.json                    ESM, 零依赖
 ├── README.md                       三层架构说明 + 里程碑清单
 ├── HANDOFF.md                      交接文档（M1-M5 全量状态 + 技术发现）
@@ -69,25 +71,47 @@ goal1/
 │   ├── library-index.js            M1：下载解析 library.json，构建索引
 │   ├── layout.js                   M3：过程化布局层（参数→props[]）
 │   ├── llm-layer.js                M4：LLM 理解层（解析自然语言 → 参数 JSON）
-│   └── generate.js                 M5：CLI 入口（端到端生成）
+│   ├── generate.js                 M5：CLI 入口（端到端生成）
+│   ├── gen-params.js               从参数 JSON 直接生成 map.bin（跳过 LLM）
+│   ├── analyze-map.js              地图深度分析器（对称性/热力/类别分布/玩法推断）
+│   ├── compare-maps.js             双图差异量化引擎（参考 vs 生成）
+│   └── preview-html.js             3D 地图预览 HTML 生成器（Three.js CDN）
 ├── test/
 │   ├── verify-roundtrip.js         M2 往返测试（21/21 通过）
 │   ├── verify-layout.js            M3 布局验证（20/20 通过）
 │   ├── verify-llm.js               M4 LLM 理解层测试
 │   ├── verify-generate.js          M5 CLI 集成测试
+│   ├── verify-analyze.js           地图分析器验证
 │   ├── parse-real-map.js           真实 Highland map.bin 解析验证
 │   └── probe-library.js            library.json 结构探查
 ├── tools/
 │   ├── analyze-maps.js             批量下载+解析真实地图，提取布局模式
-│   └── check-unknown.js            检查未知 prop 名称
+│   ├── check-unknown.js            检查未知 prop 名称
+│   ├── train-loop.js               自动化训练循环（参考地图 → 自动调参 → 生成 → 比对）
+│   └── report-training.js          训练报告生成器（汇总 train-loop 输出）
+├── output/
+│   ├── demo-symmetric-hills.bin    M3 输出样例
+│   ├── test-m5.bin                 M5 测试输出
+│   ├── test-m5-seed1.bin           M5 种子1 输出
+│   ├── test-m5-seed2.bin           M5 种子2 输出
+│   ├── industrial-dm.bin           工业死斗模式地图
+│   ├── industrial-dm-params.json   工业死斗参数
+│   ├── forest-preview.html         森林预览
+│   ├── gen-preview.html            生成预览
+│   ├── highland-preview.html       高地预览
+│   ├── highland-nocol-preview.html 高地（无碰撞）预览
+│   ├── industrial-dm-preview.html  工业死斗预览
+│   └── sub/deep/test.bin           嵌套目录测试
 └── data/
     ├── library_index.json          1146 props 完整索引
     ├── library_catalog.json        按语义类别分组的精简目录
     ├── map_references.json         真实地图布局参考数据
     ├── resource_urls.json          资源 URL 对照表
+    ├── generation-experience.json  训练经验积累数据
     └── cache/
         ├── main_library.json       Main Library 原始 JSON（1020 props）
-        └── newyear_library.json    New Year Library 原始 JSON（126 props）
+        ├── newyear_library.json    New Year Library 原始 JSON（126 props）
+        └── maps/                   14 张真实地图 bin（Cross/Forest/Highland/Parma/Sandal/Sandbox）
 ```
 
 ### 各里程碑详情
@@ -206,3 +230,4 @@ goal2/
 - 2026-07-26（第二~三次）：调研实现目录，子代理自主导入代码到分支
 - 2026-07-26（第四次）：全量同步 goal1 最新代码（M3 验证通过，新增 5 文件）。确认 goal2 分支代码比实现目录更新。修复 goal2 分支的 goal1 文件污染。
 - 2026-07-26（第五次）：goal1 完成 M4+M5（全部里程碑完成），推送到远程。goal2 完成全部 27 张地图下载和简化，已推送。本版本两份进度文档全面同步更新。
+- 2026-07-31（第六次）：goal1 同步之前漏推的 35 个文件 — train-loop.js/report-training.js/analyze-map.js/compare-maps.js/gen-params.js/preview-html.js + 14 张参考地图 bin + M5 测试输出等。HEAD: bb73559。goal2 已是最新。注意：goal2 的 scripts/ 目录（v1.1~v1.14 脚本存档）在清理时被误删，需从备份恢复。
