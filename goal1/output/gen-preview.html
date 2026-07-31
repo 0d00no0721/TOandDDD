@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>gen-test — 3D 地图预览</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { overflow:hidden; background:#1a1a2e; font-family:system-ui,sans-serif; }
+  canvas { display:block; }
+
+  #panel { position:fixed; top:12px; right:12px; background:rgba(0,0,0,0.75); color:#ccc;
+    border-radius:8px; padding:12px 14px; font-size:13px; min-width:180px; z-index:10; }
+  #panel h3 { color:#fff; margin:0 0 8px; font-size:14px; }
+  #panel button { display:block; width:100%; margin:4px 0; padding:6px 10px; border-radius:4px;
+    border:1px solid #555; background:#333; color:#ddd; cursor:pointer; font-size:12px; }
+  #panel button:hover { background:#444; border-color:#888; }
+  #panel button.active { background:#2d6a4f; border-color:#40916c; color:#fff; }
+  #panel .hint { font-size:10px; color:#888; margin-top:6px; line-height:1.5; }
+
+  #legend { position:fixed; top:12px; left:12px; background:rgba(0,0,0,0.75); color:#ccc;
+    border-radius:8px; padding:10px 12px; font-size:12px; z-index:10; }
+  #legend h4 { color:#fff; margin:0 0 6px; font-size:13px; }
+
+  #loading { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    color:#fff; font-size:18px; z-index:20; }
+</style>
+</head>
+<body>
+<div id="loading">加载中...</div>
+
+<div id="legend">
+  <h4>分类图例</h4>
+  <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="natural" onchange="toggleCategory('natural',this.checked)">
+          <span style="width:14px;height:14px;background:#4caf50;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">自然 (24)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="structure" onchange="toggleCategory('structure',this.checked)">
+          <span style="width:14px;height:14px;background:#9e9e9e;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">建筑 (28)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="decoration" onchange="toggleCategory('decoration',this.checked)">
+          <span style="width:14px;height:14px;background:#2196f3;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">装饰 (12)</span>
+        </label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:2px 0">
+          <input type="checkbox" checked data-cat="other" onchange="toggleCategory('other',this.checked)">
+          <span style="width:14px;height:14px;background:#9c27b0;border-radius:2px;flex-shrink:0"></span>
+          <span style="font-size:12px">其他 (2)</span>
+        </label>
+</div>
+
+<div id="panel">
+  <h3>gen-test</h3>
+  <div style="font-size:11px;color:#aaa;margin-bottom:8px">
+    道具: 66 · 材质: 28<br>
+    尺寸: 55,900 × 4,500 (x:z = 12.4:1)
+  </div>
+  <button id="btn-collision" class="" >显示碰撞层</button>
+  <button id="btn-reset">重置视角</button>
+  <button id="btn-top">俯视图</button>
+  <button id="btn-wireframe">线框模式</button>
+  <div class="hint">🖱 旋转 / 缩放 / 平移<br>双击重置视角</div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const PROPS = [{"id":0,"name":"Pipe_Joint","pos":[27950,0,-830.4759521484375],"rot":[0,2.8267781734466553,0],"scl":[1,1,1],"cat":"structure"},{"id":1,"name":"Pipe_Joint","pos":[-27950,0,-830.4759521484375],"rot":[0,-2.8267781734466553,0],"scl":[1,1,1],"cat":"structure"},{"id":2,"name":"Industrial_Wall_Bottom_01_half_sub1","pos":[-25122.0078125,0,-2250],"rot":[0,3.4972195625305176,0],"scl":[1,1,1],"cat":"structure"},{"id":3,"name":"Industrial_Wall_Bottom_01_half_sub1","pos":[25122.0078125,0,-2250],"rot":[0,-3.4972195625305176,0],"scl":[1,1,1],"cat":"structure"},{"id":4,"name":"wall_new_st_sn_LOD0","pos":[-27950,0,-1172.196533203125],"rot":[0,4.057017803192139,0],"scl":[1,1,1],"cat":"structure"},{"id":5,"name":"wall_new_st_sn_LOD0","pos":[27950,0,-1172.196533203125],"rot":[0,-4.057017803192139,0],"scl":[1,1,1],"cat":"structure"},{"id":6,"name":"Saw_01_sub4","pos":[-10996.740234375,0,-2250],"rot":[0,4.640894889831543,0],"scl":[1,1,1],"cat":"other"},{"id":7,"name":"Saw_01_sub4","pos":[10996.740234375,0,-2250],"rot":[0,-4.640894889831543,0],"scl":[1,1,1],"cat":"other"},{"id":8,"name":"fab_tow_LOD0_sub0","pos":[27950,0,36.78293228149414],"rot":[0,1.2829642295837402,0],"scl":[1,1,1],"cat":"structure"},{"id":9,"name":"fab_tow_LOD0_sub0","pos":[-27950,0,36.78293228149414],"rot":[0,-1.2829642295837402,0],"scl":[1,1,1],"cat":"structure"},{"id":10,"name":"Industrial_Wall_Window_01e_sub0","pos":[-11592.46875,0,2250],"rot":[0,0.4693202078342438,0],"scl":[1,1,1],"cat":"structure"},{"id":11,"name":"Industrial_Wall_Window_01e_sub0","pos":[11592.46875,0,2250],"rot":[0,-0.4693202078342438,0],"scl":[1,1,1],"cat":"structure"},{"id":12,"name":"fab_tow2_sub2","pos":[-27950,0,831.537109375],"rot":[0,4.354801177978516,0],"scl":[1,1,1],"cat":"structure"},{"id":13,"name":"fab_tow2_sub2","pos":[27950,0,831.537109375],"rot":[0,-4.354801177978516,0],"scl":[1,1,1],"cat":"structure"},{"id":14,"name":"s_conc_fence_2_sn","pos":[27950,0,-1895.3470458984375],"rot":[0,5.92966365814209,0],"scl":[1,1,1],"cat":"structure"},{"id":15,"name":"s_conc_fence_2_sn","pos":[-27950,0,-1895.3470458984375],"rot":[0,-5.92966365814209,0],"scl":[1,1,1],"cat":"structure"},{"id":16,"name":"Wall_Pieces_02_sub1","pos":[24768.494140625,0,2250],"rot":[0,0.8626713156700134,0],"scl":[1,1,1],"cat":"structure"},{"id":17,"name":"Wall_Pieces_02_sub1","pos":[-24768.494140625,0,2250],"rot":[0,-0.8626713156700134,0],"scl":[1,1,1],"cat":"structure"},{"id":18,"name":"Industrial_Wall_Bottom_Door_01_sub2","pos":[-27112.796875,0,-2250],"rot":[0,2.264747142791748,0],"scl":[1,1,1],"cat":"structure"},{"id":19,"name":"Industrial_Wall_Bottom_Door_01_sub2","pos":[27112.796875,0,-2250],"rot":[0,-2.264747142791748,0],"scl":[1,1,1],"cat":"structure"},{"id":20,"name":"fab_tow2_sn_sub2","pos":[6267.63330078125,0,2250],"rot":[0,5.652089595794678,0],"scl":[1,1,1],"cat":"structure"},{"id":21,"name":"fab_tow2_sn_sub2","pos":[-6267.63330078125,0,2250],"rot":[0,-5.652089595794678,0],"scl":[1,1,1],"cat":"structure"},{"id":22,"name":"Wooden_Pile_01a","pos":[12297.4892578125,0,-2250],"rot":[0,5.8739471435546875,0],"scl":[1,1,1],"cat":"structure"},{"id":23,"name":"Wooden_Pile_01a","pos":[-12297.4892578125,0,-2250],"rot":[0,-5.8739471435546875,0],"scl":[1,1,1],"cat":"structure"},{"id":24,"name":"Wall_Edge_L","pos":[11568.7822265625,0,2250],"rot":[0,1.1286028623580933,0],"scl":[1,1,1],"cat":"structure"},{"id":25,"name":"Wall_Edge_L","pos":[-11568.7822265625,0,2250],"rot":[0,-1.1286028623580933,0],"scl":[1,1,1],"cat":"structure"},{"id":26,"name":"Fence_02b","pos":[-27950,0,1480.7020263671875],"rot":[0,0.7577055096626282,0],"scl":[1,1,1],"cat":"structure"},{"id":27,"name":"Fence_02b","pos":[27950,0,1480.7020263671875],"rot":[0,-0.7577055096626282,0],"scl":[1,1,1],"cat":"structure"},{"id":28,"name":"fab_tow_LOD2_sub0","pos":[27950,0,288.8809814453125],"rot":[0,5.756152629852295,0],"scl":[1,1,1],"cat":"structure"},{"id":29,"name":"fab_tow_LOD2_sub0","pos":[-27950,0,288.8809814453125],"rot":[0,-5.756152629852295,0],"scl":[1,1,1],"cat":"structure"},{"id":30,"name":"Tree_beech_bare_sn","pos":[-3326.88525390625,0,324.7955322265625],"rot":[0,2.1171951293945312,0],"scl":[1,1,1],"cat":"natural"},{"id":31,"name":"Tree_beech_bare_sn","pos":[3326.88525390625,0,324.7955322265625],"rot":[0,-2.1171951293945312,0],"scl":[1,1,1],"cat":"natural"},{"id":32,"name":"Tree_Birch_S_sub0","pos":[4850.45068359375,0,-732.9547119140625],"rot":[0,4.583043098449707,0],"scl":[1,1,1],"cat":"natural"},{"id":33,"name":"Tree_Birch_S_sub0","pos":[-4850.45068359375,0,-732.9547119140625],"rot":[0,-4.583043098449707,0],"scl":[1,1,1],"cat":"natural"},{"id":34,"name":"Tree_Birch_L_au_sub0","pos":[-10321.482421875,0,-207.98226928710938],"rot":[0,5.297515392303467,0],"scl":[1,1,1],"cat":"natural"},{"id":35,"name":"Tree_Birch_L_au_sub0","pos":[10321.482421875,0,-207.98226928710938],"rot":[0,-5.297515392303467,0],"scl":[1,1,1],"cat":"natural"},{"id":36,"name":"Big_tree_branches_sn","pos":[9831.2861328125,0,2045.20751953125],"rot":[0,5.593279838562012,0],"scl":[1,1,1],"cat":"natural"},{"id":37,"name":"Big_tree_branches_sn","pos":[-9831.2861328125,0,2045.20751953125],"rot":[0,-5.593279838562012,0],"scl":[1,1,1],"cat":"natural"},{"id":38,"name":"Snowman_Red_05","pos":[-3432.669921875,0,187.182373046875],"rot":[0,1.8593800067901611,0],"scl":[1,1,1],"cat":"natural"},{"id":39,"name":"Snowman_Red_05","pos":[3432.669921875,0,187.182373046875],"rot":[0,-1.8593800067901611,0],"scl":[1,1,1],"cat":"natural"},{"id":40,"name":"Cliff_Wall_05_Low_gr_sn","pos":[-20115.77734375,0,814.4270629882812],"rot":[0,1.9685571193695068,0],"scl":[1,1,1],"cat":"natural"},{"id":41,"name":"Cliff_Wall_05_Low_gr_sn","pos":[20115.77734375,0,814.4270629882812],"rot":[0,-1.9685571193695068,0],"scl":[1,1,1],"cat":"natural"},{"id":42,"name":"Cliff_01_au","pos":[14411.505859375,0,1675.7705078125],"rot":[0,0.588365912437439,0],"scl":[1,1,1],"cat":"natural"},{"id":43,"name":"Cliff_01_au","pos":[-14411.505859375,0,1675.7705078125],"rot":[0,-0.588365912437439,0],"scl":[1,1,1],"cat":"natural"},{"id":44,"name":"Tree_Beech_Sp_au","pos":[-1240.2532958984375,0,1332.8763427734375],"rot":[0,0.8166838884353638,0],"scl":[1,1,1],"cat":"natural"},{"id":45,"name":"Tree_Beech_Sp_au","pos":[1240.2532958984375,0,1332.8763427734375],"rot":[0,-0.8166838884353638,0],"scl":[1,1,1],"cat":"natural"},{"id":46,"name":"bush1_LOD0","pos":[23826.419921875,0,-1331.4453125],"rot":[0,4.457478046417236,0],"scl":[1,1,1],"cat":"natural"},{"id":47,"name":"bush1_LOD0","pos":[-23826.419921875,0,-1331.4453125],"rot":[0,-4.457478046417236,0],"scl":[1,1,1],"cat":"natural"},{"id":48,"name":"Halloween_Decor_Garland_01c","pos":[10064.4375,0,-1146.0260009765625],"rot":[0,2.594088077545166,0],"scl":[1,1,1],"cat":"natural"},{"id":49,"name":"Halloween_Decor_Garland_01c","pos":[-10064.4375,0,-1146.0260009765625],"rot":[0,-2.594088077545166,0],"scl":[1,1,1],"cat":"natural"},{"id":50,"name":"Cliff_bg_a","pos":[-16962.751953125,0,640.31884765625],"rot":[0,2.1107177734375,0],"scl":[1,1,1],"cat":"natural"},{"id":51,"name":"Cliff_bg_a","pos":[16962.751953125,0,640.31884765625],"rot":[0,-2.1107177734375,0],"scl":[1,1,1],"cat":"natural"},{"id":52,"name":"Garland_M","pos":[-14769.51171875,0,533.6600341796875],"rot":[0,5.572424411773682,0],"scl":[1,1,1],"cat":"natural"},{"id":53,"name":"Garland_M","pos":[14769.51171875,0,533.6600341796875],"rot":[0,-5.572424411773682,0],"scl":[1,1,1],"cat":"natural"},{"id":54,"name":"Vilhou_3_sub3","pos":[-2657.432373046875,0,-137.34378051757812],"rot":[0,5.426800727844238,0],"scl":[1,1,1],"cat":"decoration"},{"id":55,"name":"Vilhou_3_sub3","pos":[2657.432373046875,0,-137.34378051757812],"rot":[0,-5.426800727844238,0],"scl":[1,1,1],"cat":"decoration"},{"id":56,"name":"Vilhou_2 b_sub9","pos":[1564.6983642578125,0,-213.9840850830078],"rot":[0,5.503588676452637,0],"scl":[1,1,1],"cat":"decoration"},{"id":57,"name":"Vilhou_2 b_sub9","pos":[-1564.6983642578125,0,-213.9840850830078],"rot":[0,-5.503588676452637,0],"scl":[1,1,1],"cat":"decoration"},{"id":58,"name":"billboard_1_sn","pos":[4592.6259765625,0,-210.69468688964844],"rot":[0,1.156253457069397,0],"scl":[1,1,1],"cat":"decoration"},{"id":59,"name":"billboard_1_sn","pos":[-4592.6259765625,0,-210.69468688964844],"rot":[0,-1.156253457069397,0],"scl":[1,1,1],"cat":"decoration"},{"id":60,"name":"Spiderweb_Vilhou_3a","pos":[-1467.4742431640625,0,-49.996517181396484],"rot":[0,1.7309212684631348,0],"scl":[1,1,1],"cat":"decoration"},{"id":61,"name":"Spiderweb_Vilhou_3a","pos":[1467.4742431640625,0,-49.996517181396484],"rot":[0,-1.7309212684631348,0],"scl":[1,1,1],"cat":"decoration"},{"id":62,"name":"Vilhou_4_sn_sub5","pos":[-4498.5322265625,0,129.12229919433594],"rot":[0,3.596191644668579,0],"scl":[1,1,1],"cat":"decoration"},{"id":63,"name":"Vilhou_4_sn_sub5","pos":[4498.5322265625,0,129.12229919433594],"rot":[0,-3.596191644668579,0],"scl":[1,1,1],"cat":"decoration"},{"id":64,"name":"Vilhou_2 b_sub1","pos":[417.2813720703125,0,-175.8453369140625],"rot":[0,1.8378549814224243,0],"scl":[1,1,1],"cat":"decoration"},{"id":65,"name":"Vilhou_2 b_sub1","pos":[-417.2813720703125,0,-175.8453369140625],"rot":[0,-1.8378549814224243,0],"scl":[1,1,1],"cat":"decoration"}];
+const COLORS = {"natural":5025616,"structure":10395294,"decoration":2201331,"terrain":7951688,"vehicle":16007990,"other":10233776};
+const COLLISION = {"col1":{"shapesType1":[],"shapesType2":[],"shapesType3":[]},"col2":{"shapesType1":[],"shapesType2":[],"shapesType3":[]}};
+
+const centerX = 0, centerZ = 0;
+const camDist = 30745.000000000004;
+const boxBase = 465.8333333333333;
+const spanX = 55900, spanY = 1, spanZ = 4500;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1a1a2e);
+scene.fog = new THREE.Fog(0x1a1a2e, camDist * 2, camDist * 4);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = false;
+document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 100, camDist * 8);
+camera.position.set(centerX, camDist * 0.7, centerZ + camDist);
+camera.lookAt(centerX, 0, centerZ);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(centerX, 0, centerZ);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.48;
+controls.update();
+
+// ── 光照 ──
+scene.add(new THREE.AmbientLight(0x404060, 1.5));
+const dir = new THREE.DirectionalLight(0xffffff, 2);
+dir.position.set(centerX + camDist, camDist * 2, centerZ + camDist);
+scene.add(dir);
+const dir2 = new THREE.DirectionalLight(0x8888cc, 0.8);
+dir2.position.set(centerX - camDist, camDist, centerZ - camDist);
+scene.add(dir2);
+
+// ── 地面网格 ──
+const gridSize = Math.max(spanX, spanZ) * 1.1;
+const gridDiv = Math.max(40, Math.round(gridSize / 5000));
+const grid = new THREE.GridHelper(gridSize, gridDiv, 0x334455, 0x1a1a2e);
+grid.position.set(centerX, 0, centerZ);
+scene.add(grid);
+
+// Y 轴参考线（细红线标地面）
+const ySpan = Math.max(Math.abs(0), Math.abs(0), spanY);
+if (ySpan > 500) {
+  const yLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(centerX, -ySpan, centerZ), new THREE.Vector3(centerX, ySpan, centerZ)]),
+    new THREE.LineBasicMaterial({ color: 0x883333, transparent: true, opacity: 0.3 })
+  );
+  scene.add(yLine);
+}
+
+// ── 分类 → InstancedMesh ──
+const boxGeo = new THREE.BoxGeometry(1, 1, 1);
+const catMeshes = {};
+const catGroups = {};
+
+for (const [cat, color] of Object.entries(COLORS)) {
+  const count = PROPS.filter(p => p.cat === cat).length;
+  if (count === 0) continue;
+  const mat = new THREE.MeshPhongMaterial({ color, specular: 0x111111, shininess: 10, flatShading: true });
+  const mesh = new THREE.InstancedMesh(boxGeo, mat, count);
+  mesh.castShadow = false;
+  mesh.receiveShadow = false;
+  mesh.name = cat;
+  catMeshes[cat] = mesh;
+  scene.add(mesh);
+
+  const wireMat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.4 });
+  const wireMesh = new THREE.InstancedMesh(boxGeo, wireMat, count);
+  wireMesh.visible = false;
+  wireMesh.name = cat + '_wire';
+  catMeshes[cat + '_wire'] = wireMesh;
+  scene.add(wireMesh);
+}
+
+// 填充实例矩阵
+const dummy = new THREE.Object3D();
+const catIndices = {};
+for (const cat of Object.keys(COLORS)) catIndices[cat] = 0;
+
+for (const p of PROPS) {
+  const idx = catIndices[p.cat]++;
+  const sx = boxBase * (p.scl[0] || 1);
+  const sy = boxBase * (p.scl[1] || 1);
+  const sz = boxBase * (p.scl[2] || 1);
+  dummy.position.set(p.pos[0], p.pos[1], p.pos[2]);
+  dummy.rotation.set(p.rot[0], p.rot[1], p.rot[2]);
+  dummy.scale.set(sx, sy, sz);
+  dummy.updateMatrix();
+  catMeshes[p.cat].setMatrixAt(idx, dummy.matrix);
+  catMeshes[p.cat + '_wire'].setMatrixAt(idx, dummy.matrix);
+}
+for (const [cat, mesh] of Object.entries(catMeshes)) {
+  if (mesh.isInstancedMesh) { mesh.instanceMatrix.needsUpdate = true; mesh.count = mesh.count; }
+}
+
+// ── 碰撞层 (可选) ──
+let collisionGroup = null;
+let collisionBuilt = false;
+
+function buildCollision() {
+  if (collisionBuilt || !COLLISION) return;
+  collisionBuilt = true;
+  collisionGroup = new THREE.Group();
+  collisionGroup.name = 'collision';
+  collisionGroup.visible = false;
+
+  const col1Mat = new THREE.LineBasicMaterial({ color: 0xFF3333, transparent: true, opacity: 0.6 });
+  const col2Mat = new THREE.LineBasicMaterial({ color: 0x33FF33, transparent: true, opacity: 0.6 });
+
+  function addShapes(collision, mat) {
+    for (const d of (collision.shapesType1 || [])) {
+      const [px, py, pz, rx, ry, rz, sx, sy, sz] = d;
+      const geo = new THREE.BoxGeometry(sx || 100, sy || 100, sz || 100);
+      const edges = new THREE.EdgesGeometry(geo);
+      const line = new THREE.LineSegments(edges, mat);
+      line.position.set(px, py, pz);
+      line.rotation.set(rx, ry, rz);
+      collisionGroup.add(line);
+    }
+    for (const d of (collision.shapesType2 || [])) {
+      const f1 = d.f1, f2 = d.f2;
+      const [px, py, pz, rx, ry, rz] = d.data;
+      const geo = new THREE.BoxGeometry(f2 || 200, 5, f1 || 200);
+      const edges = new THREE.EdgesGeometry(geo);
+      const line = new THREE.LineSegments(edges, mat);
+      line.position.set(px, py, pz);
+      line.rotation.set(rx, ry, rz);
+      collisionGroup.add(line);
+    }
+    for (const d of (collision.shapesType3 || [])) {
+      const [px, py, pz, rx, ry, rz, v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z] = d.data;
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute([v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z], 3));
+      const line = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(v1x, v1y, v1z),
+          new THREE.Vector3(v2x, v2y, v2z),
+          new THREE.Vector3(v3x, v3y, v3z),
+          new THREE.Vector3(v1x, v1y, v1z),
+        ]),
+        mat
+      );
+      line.position.set(px, py, pz);
+      line.rotation.set(rx, ry, rz);
+      collisionGroup.add(line);
+    }
+  }
+
+  if (COLLISION.col1) addShapes(COLLISION.col1, col1Mat);
+  if (COLLISION.col2) addShapes(COLLISION.col2, col2Mat);
+  scene.add(collisionGroup);
+}
+
+// ── UI 交互 ──
+document.getElementById('loading').style.display = 'none';
+
+let wireframeMode = false;
+
+function toggleCategory(cat, visible) {
+  if (catMeshes[cat]) {
+    catMeshes[cat].visible = visible;
+    if (!wireframeMode) catMeshes[cat + '_wire'].visible = false;
+  }
+}
+
+function setWireframe(on) {
+  wireframeMode = on;
+  const btn = document.getElementById('btn-wireframe');
+  if (on) { btn.textContent = '实体模式'; btn.classList.add('active'); }
+  else { btn.textContent = '线框模式'; btn.classList.remove('active'); }
+  for (const [key, mesh] of Object.entries(catMeshes)) {
+    if (key.endsWith('_wire')) {
+      mesh.visible = on && catMeshes[key.replace('_wire', '')].visible;
+    } else {
+      mesh.visible = !on;
+    }
+  }
+}
+
+document.getElementById('btn-wireframe').addEventListener('click', () => setWireframe(!wireframeMode));
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  camera.position.set(centerX, camDist * 0.7, centerZ + camDist);
+  controls.target.set(centerX, 0, centerZ);
+  controls.update();
+});
+
+document.getElementById('btn-top').addEventListener('click', () => {
+  camera.position.set(centerX, camDist * 1.2, centerZ + 10);
+  controls.target.set(centerX, 0, centerZ);
+  controls.update();
+});
+
+const btnCol = document.getElementById('btn-collision');
+if (COLLISION) {
+  btnCol.addEventListener('click', () => {
+    buildCollision();
+    if (!collisionGroup) return;
+    collisionGroup.visible = !collisionGroup.visible;
+    btnCol.textContent = collisionGroup.visible ? '隐藏碰撞层' : '显示碰撞层';
+    btnCol.classList.toggle('active', collisionGroup.visible);
+  });
+} else {
+  btnCol.textContent = '(无碰撞数据)';
+  btnCol.disabled = true;
+  btnCol.style.opacity = '0.5';
+}
+
+window.addEventListener('dblclick', (e) => {
+  if (e.target.tagName === 'BUTTON' || e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') return;
+  camera.position.set(centerX, camDist * 0.7, centerZ + camDist);
+  controls.target.set(centerX, 0, centerZ);
+  controls.update();
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// 暴露给全局（legend checkbox 用）
+window.toggleCategory = toggleCategory;
+
+// ── 渲染循环 ──
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
