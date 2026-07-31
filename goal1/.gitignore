@@ -1,0 +1,4 @@
+# Override root .gitignore for map generator outputs
+!*.bin
+!*.json
+!*.html
